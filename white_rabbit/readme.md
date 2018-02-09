@@ -69,7 +69,7 @@ of the structure is set to point to this block. Offset `0x10` (`[ebp+var_428]`) 
 Without further ado, we can rename these three functions to `print_coloured_string`, `read_input_line`
  and `calculate_checksum` respectively.
 
-Looking into `calculate_checksum` doens't get us much further: It calculates a 32-bit
+Looking into `calculate_checksum` doesn't get us much further: It calculates a 32-bit
  [CRC](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)-like checksum using the primitive
 polynomial `0x182F63B78`. There are many ways to invert this, but as it only has 32-bits, it
 will not give us the complete password we need.
@@ -113,13 +113,14 @@ section with the part of the password we've recovered. Notice that we need to al
 decryption with a multiple of 17 (the length of the password):
 ![level1-vig-dec2](./level1-vig-dec2.png)
 
-The long coonstant sections in the plaintext file are filled with `0x01`, hence it's now trivial
+The long constant sections in the plaintext file are filled with `0x01`, hence it's now trivial
 to recover the whole password by xoring one of the repeating segments with the known plaintext of
 repeated `0x01`:
 
 ![level1-vig-dec3](./level1-vig-dec3.png)
 
 And now we have the first password and the decrypted wallpaper:
+
 ![wallp](./wallp.png)
 
 The `do_level2()` function has a very similar structure to `do_level1()` except that it loads
@@ -206,10 +207,10 @@ which is actually implemented inside the body of the function:
 
 The exception filter picks up all exceptions and the handler just calls `sub_403330` to fill the
 same buffer as earlier with random characters and then continues execution as normal. As an aside,
-`dword_42109C' is the length of the string that will be exchanged with `main` and that
+`dword_42109C` is the length of the string that will be exchanged with `main` and that
 comparison is there to ensure that this part of the code does not overwrite the stirng twice.
 
-Anyway, it seems that both `sub_403330` and the array at `bybte_422AE8` are decoys, so I'll
+Anyway, it seems that both `sub_403330` and the array at `byte_422AE8` are decoys, so I'll
 rename them to `decoy_randomize_array` and `decoy_random_array` respectively.
 
 The rest of `TlsCallback_0` is fairly simple-looking: It calls `sub_404480` and uses a single
@@ -263,6 +264,17 @@ that decodes the youtube reference, however it's a lot easier to write a Python 
 just delivers the characters to the right ports.
 
 Just fire up `good_rabbit.exe` and then hit [this script](./run_rabbit.py):
+```python
+from socket import create_connection
+
+for c, p in zip('935', range(1337, 1340)):
+    conn = create_connection(('127.0.0.1', p))
+    conn.send(c)
+    print conn.recv(1)
+    conn.close
+
+```
+to get:
 
 ![WIN](./win-rabbit.png)
 
