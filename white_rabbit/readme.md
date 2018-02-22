@@ -14,50 +14,56 @@ Stage 1: White Rabbit
 The crackme is ~7MB windows PE32 executable called `white_rabbit.exe`. A quick peek
  in [CFF Explorer][CFF] shows us that the bulk of the exe is in the resources
  (section `.rsrc`):
+
 ![pe-headers](./CFF-headers.png)
 
 There are two `RCDATA` resources the first of which (id 101) is the biggest
  and looks suspiciously like a very low entropy file that's been encrypted
  with a [Vignere](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher) cipher
  (the giveaway is the repeating patterns):
+
 ![pe-res101](./CFF-res101.png)
 
 Running it produces an ASCII art rabbit, a green coloured introduction and a prompt for the first
 (of many?) passwords:
+
 ![white-rabbit-pwd1](./white-rabbit-pwd1.png)
 
 With these hints in mind, let's fire up IDA to have a peek at the code driving all this. After
-initial autoanalysis, IDA takes us straigt to `main()`, which seems to have a very
-straight-forward structure:
+initial autoanalysis, IDA takes us straight to `main()`, which seems to have a very
+simple structure:
+
 ![white-rabbit-main](./white-rabbit-main.png)
 
 - `sub_402CC0` seems to do the initial setup
-- `sub_4034D0` is probably Level1 (returning false triggers a `Nope` and exit)
+- `sub_4034D0` is probably Level1 (returning false triggers a `"Nope!"` message and exit)
 - `sub_4036F0` is probably Level2 (similar reasoning)
 
 Scanning through the three subs seems to verify our guesses as the first one references the rabbit
-ASCII art and the intro text, the second one references the string `Password#1:` and the third one
-has a reference to the string `Password#2:` (we could have gotten to the same conclusion by ignoring
-programme flow and looking at references to the password prompt strings).
+ASCII art and the intro text, the second one references the string `"Password#1:"` and the third one
+has a reference to the string `"Password#2:"` (we could have gotten to the same conclusion by ignoring
+program flow and looking for references to the password prompt strings).
 Let's focus on the second sub (which I've renamed `do_level1`). After a bit of boilerplate, it 
 calls `sub_403D90(&dword, 0x65)`, where IDA is helpfully pointing out that its second argument
  has something to do with resources:
+
 ![level1-load](./level1-load.png)
 
 Indeed, `sub_403D90` loads the resource identified by the second argument, copies into some freshly
 allocated memory (courtesy of `VirtualAlloc()`) and returns a pointer to this copy in `eax` while
 filling in the size of the loaded resource into the `DWORD` pointed to by the first argument.
 Hence we should expect `esi` to point to the loaded copy of resource 101 (the big, low entropy
-Vignere'd blob) and `[ebp+nNumberOfBytesToWrite]` to containg its size. The next part looks
-slightly more convoluted:
+Vignere'd blob) and `[ebp+nNumberOfBytesToWrite]` to contain its size. The next part looks
+somewhat more convoluted:
+
 ![level1-getpwd](./level1-getpwd.png)
 
-Just looking at the call structure, you'd guess the the first call (`sub_403990`) prints the
+Just looking at the call structure, you'd guess that the first call (`sub_403990`) prints the
 password prompt, the second call (`sub_401000`) reads the password and the third one calculates
 some checksum or hash that needs to be equal to `0x57585384`. The dataflow in the arguments
-to the functions gives the game away as the first function is only given pointers to read-only
+to the functions confirms these guesses as the first function is only passed pointers to read-only
 data, hence it probably only prints something, the second function gets given a pointer to the
-stack argument `[ebp+var_438]` as well as a pointer to a static (which turns out to be `std::cin`)
+writable stack argument `[ebp+var_438]` as well as a pointer to a static (which turns out to be `std::cin`)
 and the third function gets either the data or a pointer to the same stack argument.
 
 As an aside, the whole run-around with the compare to `0x10` and `cmovnb` arises from an optimization
@@ -71,10 +77,11 @@ Without further ado, we can rename these three functions to `print_coloured_stri
 
 Looking into `calculate_checksum` doesn't get us much further: It calculates a 32-bit
  [CRC](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)-like checksum using the primitive
-polynomial `0x182F63B78`. There are many ways to invert this, but as it only has 32-bits, it
-will not give us the complete password we need.
+polynomial `0x182F63B78`. There are a couple of ways to invert this, but as the checksum only has 32-bits,
+it will not give us the complete password we need.
 
 The next segment is a bit more interesting:
+
 ![level1-call-vig](./level1-call-vig.png)
 
 Effectively it's just:
@@ -83,19 +90,22 @@ we would expect from a decryptor. Looking at the sub itself, it seems to impleme
  Vignere-xor cipher: It first calculates the length of the password (`arg_8`) which it stores into
 `ecx` and then uses `div ecx` to divide the current offset in the data buffer by the length of
 the password and get the remainder into `edx` which it uses as an index into the password:
+
 ![level1-vig](./level1-vig.png)
 
-The next part of `do_level1()` is fairly dull: Create a random file name in the temp directory
-using the template `wallp{hex number}.tmp` and the save the decrypted resource to it (courtesy of
-`sub_403090` which I'm renaming to `save_data_to_file`). Then it calls `sub_403D20` with the
-newly created filename as argument:
+The next part of `do_level1()` is fairly dull: Create a random filename in the temp directory
+using the template `wallp{hex_number}.tmp` and then save the decrypted resource to it (courtesy of
+`sub_403090` which I'm renaming to `save_data_to_file`). After the file has been written,
+ `do_level1()` calls `sub_403D20` with the newly created filename as argument:
+
 ![level1-set-wallp](./level1-set-wallp.png)
 
 Looking up [`SystemParametersInfo`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx)
  in MSDN reveals that `0x14` corresponds to `SPI_SETDESKWALLPAPER`
 which changes the desktop wallpaper to the supplied file.
 
-Hence we can conclude that resource 101 is a Vignere encrypted low-entropy image file format, hence
+Therefore we can conclude that resource 101 is a Vignere encrypted low-entropy image file format,
+and hence
 most likely a windows BMP file. We can use the information we've gleaned to break the Vignere
 cipher. The length of the password is easy to see by looking at the hexdump in CFF explorer: the
  repeating pattern is 17 bytes long. Looking up the specification of BMP files reveals that the
@@ -104,6 +114,7 @@ CFF explorer to save the resource to `res_101.bin` and then load it up in python
  with it (I'm using the `XOR` cipher implementation from the PyCrypto package because I'm lazy
  and I already have this installed, but it's fairly easy to find other implementations
  on the net or write your own version):
+
 ![level1-vig-dec1](./level1-vig-dec1.png)
 
 With the known plaintext of the BMP header we've recovered the first six characters of the
@@ -111,6 +122,7 @@ password: `follow`. The section of the file with the repeating pattern must have
 same (constanst) value in the plaintext. We can find this value by xor-ing a segment of that
 section with the part of the password we've recovered. Notice that we need to align our partial
 decryption with a multiple of 17 (the length of the password):
+
 ![level1-vig-dec2](./level1-vig-dec2.png)
 
 The long constant sections in the plaintext file are filled with `0x01`, hence it's now trivial
@@ -130,6 +142,7 @@ executes it after successful decryption.
 
 The decryption sub seems to be using the Microsoft CryptoAPI with some pretty scary cipher choices
 (`0x800C` is `CALG_SHA256` and `0x660E` is `CALG_AES_128`):
+
 ![level2-crypto](./level2-crypt.png)
 
 It doesn't look like we'll be recovering the password of this one the same way we did for the 
@@ -137,6 +150,7 @@ Vignere cipher, therefore the bitmap that first level dropped must contain some 
  There are a number of forensic / steganalysis apps and websites out there. Personally, I first
 hit [Forensically](https://29a.ch/photo-forensics/#forensic-magnifier). The Luminance Gradient
  analysis (with histogram equalization) quickly reveals a hidden message:
+
 ![wallpaper-steg](./wallpaper-steg.png)
 
 The password for level2 is `IMdsSqFGLf6v_wxO`. We can replicate the decryption function in the
@@ -152,7 +166,9 @@ and appears entirely ordinary (except for one detail, which we'll come to later)
 seem to do much - it just hangs there and has to be killed. Time to fire up IDA.
 
   The `main` function seems straightforward:
+
 ![stage2-main-1](./stage2-main-1.png)
+
 - Check for the presence of internet connection (`sub_404450` calls `InternetGetConnectedState`)
 - Inititalize some buffers
 - Get the system browser (`sub_4043E0` reads `HKCR\HTTP\shell\open\command`)
@@ -168,21 +184,26 @@ before being handed off to `WinExec`.
 
 `sub_403360` looks quite complicated: Lots of stack variables, several objects with vtables
 being constructed, references to the `iostream` libraries. Two strings stand out:
+
 ![stage2-url-1](./stage2-url-1.png)
 
 Looks like it sets up the URL: [https://www.youtube.com/watch?v=dQw4w9WgXcQ](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+
 ![rickrolled](rickrolled.png)
 
 Clearly we've missed something. There are a couple of ways to make progress from this point:
 
 
 1. Persevere with analysing this function and notice that the string that is appended to the youtube URL may also come from `[ebp+var_58]` which is initialised by call call to `sub_403110`:
+
 ![stage2-url-2](./stage2-url-2.png)
+
 In turn, this function seems to use some synchronization mechanism that relies on a global mutex
 handle stored in `hMutex` which is also referenced by a function called `TlsCallback_0`
+
 ![stage2-mutex](./stage2-mutex.png)
 
-2. Alternatively, a quick look at the strings reveals multiple error messages related to network operations that roll up to `TlsCallback_0`.
+2. Alternatively, a quick look at the strings leads us to multiple error messages related to network operations that roll up to `TlsCallback_0`.
 3. Looking at the imports turns up references to `socket`, `connect`, etc which all roll up to `TlsCallback_0`
 4. Notice the presence of a `TlsDirectory` entry in CFF Explorer
 
@@ -196,11 +217,13 @@ on TLS. Needless to say that IDA already [parses](http://www.hexblog.com/?p=9) t
 names the callback entries appropriately. 
 
 Which brings us to `TlsCallback_0`:
+
 ![stage2-tlscallback-1](./stage2-tlscallback-1.png)
 
 It seems to fill in a small buffer with random numbers and immediately raise an exception! Looking
 at the boilerplate at the top of the function, `TlsCallback_0` sets a custom exception handler
 which is actually implemented inside the body of the function:
+
 ![stage2-tlscallback-2](./stage2-tlscallback-2.png)
 ![stage2-tlscallback-3](./stage2-tlscallback-3.png)
 ![stage2-tlscallback-4](./stage2-tlscallback-4.png)
@@ -208,7 +231,7 @@ which is actually implemented inside the body of the function:
 The exception filter picks up all exceptions and the handler just calls `sub_403330` to fill the
 same buffer as earlier with random characters and then continues execution as normal. As an aside,
 `dword_42109C` is the length of the string that will be exchanged with `main` and that
-comparison is there to ensure that this part of the code does not overwrite the stirng twice.
+comparison is there to ensure that this part of the code does not overwrite the string twice.
 
 Anyway, it seems that both `sub_403330` and the array at `byte_422AE8` are decoys, so I'll
 rename them to `decoy_randomize_array` and `decoy_random_array` respectively.
@@ -222,7 +245,9 @@ sub_404480(&local_buf, 1339);
 ```
 
 `sub_404480` creates a socket and then decrypts an internet address using the code below:
+
 ![stage2-network-1](./stage2-network-1.png)
+
 A quick line of IDAPython can sort this one out:
 ```python
 ''.join([ chr((ord(x) + 0xf3)&0xff) for x in idaapi.get_many_bytes(0x41a53c,9)])
@@ -232,22 +257,25 @@ The function then binds to this interface and
 the port number given by the second argument to the function (IDA names this `hostshort` because
 it's passed to `htons` before being given to `bind`). It then calls `listen` and `accept` to
 accept incoming connections and then:
+
 ![stage2-network-2](./stage2-network-2.png)
 
 It receives up to four characters into a stack-based buffer which it then passes to `sub_404640`, 
-giving it the address of a global buffer (helpfully named `buf` by IDA) as a second argument.
-If this call returns success, it sends four characters from the global buffer on the connection as
+giving it the address of a global buffer (unhelpfully named `buf` by IDA) as a second argument.
+If this call returns success, it sends four characters from the global buffer to the connection as
 a response.
 
 The heart of this part of the challenge is the function `sub_404640`, which starts off with:
+
 ![stage2-states](./stage2-states.png)
 
 The second argument (`arg_4`) contains a pointer to the global buffer `buf` which this sub keeps
-in `ecx`. Looking at the structure of the code, it seems to behanve like a state machine using
+in `ecx`. Looking at the structure of the code, it seems to behave like a state machine using
 the first character of `buf` as the current state and the first character of the incoming message
 (pointer to by `arg_0`) as the input. The first segment of the function only accepts states `'\0'`,
 `'E'` and `'Y'` as valid states, hence we can make the function easier to read by renaming the
 targets of the corresponding branches:
+
 ![stage2-states2](./stage2-states-2.png)
 
 And hence we have the transition diagram:
@@ -280,6 +308,4 @@ to get:
 
 [IDA]:https://www.hex-rays.com/products/ida/support/download.shtml
 [CFF]:http://www.ntcore.com/exsuite.php
-
-
 
