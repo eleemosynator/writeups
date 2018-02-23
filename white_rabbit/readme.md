@@ -1,12 +1,17 @@
 White Rabbit CrackMe
 ====
-Thanks to [@hasherezade](https://twitter.com/hasherezade) and [Grant Willcox](https://twitter.com/tekwiz123) for the crackme
+It's easier to follow this write-up if you open up IDA and use the screenshots as guides to points
+of interest. It's a good idea to name symbols as you go through and I give several suggestions for
+symbol names throughout the text, however most of the screenshots are from a fresh IDA session so
+that they can be used independently.
+
+Thanks to [@hasherezade](https://twitter.com/hasherezade) and [Grant Willcox](https://twitter.com/tekwizz123) for the crackme.
 
 Tools
 --
 - [IDA Pro][IDA]: Indispensible
 - [CFF Explorer Suite][CFF]: Very good PE explorer
-- Python: for general messing around
+- [Python][Python]: For general messing around (optionally [PyCrypto][PyCrypto] as well)
 
 Stage 1: White Rabbit
 ----
@@ -20,12 +25,12 @@ The crackme is ~7MB windows PE32 executable called `white_rabbit.exe`. A quick p
 There are two `RCDATA` resources the first of which (id 101) is the biggest
  and looks suspiciously like a very low entropy file that's been encrypted
  with a [Vignere](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher) cipher
- (the giveaway is the repeating patterns):
+ (the giveaway is the long-ish repeating patterns):
 
 ![pe-res101](./CFF-res101.png)
 
-Running it produces an ASCII art rabbit, a green coloured introduction and a prompt for the first
-(of many?) passwords:
+Running the executable produces an ASCII art rabbit, a green coloured introductory text (printed
+ slowly, one character at a time) and a prompt for the first (of many?) passwords:
 
 ![white-rabbit-pwd1](./white-rabbit-pwd1.png)
 
@@ -44,17 +49,23 @@ ASCII art and the intro text, the second one references the string `"Password#1:
 has a reference to the string `"Password#2:"` (we could have gotten to the same conclusion by ignoring
 program flow and looking for references to the password prompt strings).
 Let's focus on the second sub (which I've renamed `do_level1`). After a bit of boilerplate, it 
-calls `sub_403D90(&dword, 0x65)`, where IDA is helpfully pointing out that its second argument
- has something to do with resources:
+calls `sub_403D90` with two arguments: the address of a stack-based variable and the number `0x65`
+(which is 101 in decimal). IDA is helpfully pointing out that the second argument is probably being
+used in connection with some resource (the `hResData` comment comes from this argument being passed
+to a system call inside `sub_403D90`). Furthermore note that IDA has already named the stack
+variable `nNumberOfBytesToWrite`, indicating that it is used as a data size argument on some
+system call:
 
 ![level1-load](./level1-load.png)
 
-Indeed, `sub_403D90` loads the resource identified by the second argument, copies into some freshly
-allocated memory (courtesy of `VirtualAlloc()`) and returns a pointer to this copy in `eax` while
-filling in the size of the loaded resource into the `DWORD` pointed to by the first argument.
-Hence we should expect `esi` to point to the loaded copy of resource 101 (the big, low entropy
-Vignere'd blob) and `[ebp+nNumberOfBytesToWrite]` to contain its size. The next part looks
-somewhat more convoluted:
+Indeed, a quick scan through `sub_403D90` can confirm that it loads the resource identified by
+ the second argument, copies its contents into some freshly allocated memory (courtesy of `VirtualAlloc()`)
+ and returns a pointer to this copy in `eax` (return value) while putting the size of the loaded resource 
+into the stack variable pointed to by its first argument.
+Thus we can conclude that `do_level1()` uses `sub_403D90` (which we can rename to
+ `load_resource_into_buffer`) to load resource 101 (the big, low entropy Vignere'd blob) into a writable
+ memory chunk, the address of which is then kept in `esi`, while the size of the resource is stored
+ into the stack variable `[ebp+nNumberOfBytesToWrite]`. 
 
 ![level1-getpwd](./level1-getpwd.png)
 
@@ -68,9 +79,10 @@ and the third function gets either the data or a pointer to the same stack argum
 
 As an aside, the whole run-around with the compare to `0x10` and `cmovnb` arises from an optimization
 in the `std::string` implementation where if a string is less than 16 chars long, then it is stored
-directly in the `std::string` structure otherwise a memory block is allocated and the first dword
-of the structure is set to point to this block. Offset `0x10` (`[ebp+var_428]`) holds the string
-`size()` and offset `0x14` (`[ebp+var_424]`) holds the string `capacity()`.
+directly in the `std::string` structure otherwise a memory block is allocated for the string and
+ the first dword of the structure is set to point to this block. Offset `0x10` in the structure
+ (`[ebp+var_428]`) holds the string's `size()` and offset `0x14` (`[ebp+var_424]`) holds the string's
+ `capacity()`. 
 
 Without further ado, we can rename these three functions to `print_coloured_string`, `read_input_line`
  and `calculate_checksum` respectively.
@@ -274,7 +286,9 @@ in `ecx`. Looking at the structure of the code, it seems to behave like a state 
 the first character of `buf` as the current state and the first character of the incoming message
 (pointer to by `arg_0`) as the input. The first segment of the function only accepts states `'\0'`,
 `'E'` and `'Y'` as valid states, hence we can make the function easier to read by renaming the
-targets of the corresponding branches:
+targets of the corresponding branches (IDA tip: you can rename the target of a jump instruction
+by putting the cursor on the location name and hitting 'N' - saves having to double-click back and
+forth):
 
 ![stage2-states2](./stage2-states-2.png)
 
@@ -285,7 +299,7 @@ And hence we have the transition diagram:
 'E'  -- ['5'] -> 'S'
 ```
 
-To recap, `good_rabbit.exe` expects to receive the three characters `'935'` one at a time,
+In summary, `good_rabbit.exe` expects to receive the three characters `'935'` one at a time,
 delivered separately to the ports 1337, 1338, 1339. It uses the received characters to decode
 a youtube reference which it then pops up. We can reverse engineer the part of `TlsCallback_0`
 that decodes the youtube reference, however it's a lot easier to write a Python script that
@@ -308,4 +322,5 @@ to get:
 
 [IDA]:https://www.hex-rays.com/products/ida/support/download.shtml
 [CFF]:http://www.ntcore.com/exsuite.php
-
+[PyCrypto]:https://pypi.python.org/pypi/pycrypto
+[Python]:https://www.python.org/
