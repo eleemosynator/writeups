@@ -207,9 +207,9 @@ def main():
         load_level2(decdata, len(decdata))
 ```
 
-The function `chcek_if_next()` pops the success messages box and prompts you to confirm you're ready for Level 2.
+The function `check_if_next()` pops the success messages box and prompts you to confirm you're ready for Level 2.
 The `key` we derived from the `PIN` (which is returned by the `stage1_login()` function) is
-fed into `decode_and_fetch_url()` which uses it to decrypt an encrypted URL with AES 
+fed into `decode_and_fetch_url()` which uses it to decrypt an AES-encrypted URL 
 (the internal class `AESCipher` is merely used to handle the [PKCS#7 padding](https://en.wikipedia.org/wiki/Padding_(cryptography)#PKCS7)).
 We can use a short [script](./fetch_level2_v1.py) to decrypt the URL and fetch the data. While we're
 at it, we can also wrap the `fetch_url()` function to make it print the URL before downloading its target.
@@ -263,7 +263,7 @@ def get_encoded_data(bytes):
 ```
 
 It just uses the [Python Image Library](https://pillow.readthedocs.io/en/5.1.x/) to parse the image
-format and extract the contents into a single binary string. This is then validated by `is_valid_payl()`:
+format and extract the decompressed contents into a single binary string. This is then validated by `is_valid_payl()`:
 
 ```python
 def is_valid_payl(content):
@@ -307,7 +307,7 @@ the [`ctypes`](https://docs.python.org/2/library/ctypes.html) module. In a way, 
 treated like shellcode even though it is a well-formed DLL file. 
 
 The technique we are looking at is
-called [Reflective DLL Inejection](https://www.andreafortuna.org/cybersecurity/what-is-reflective-dll-injection-and-how-can-be-detected/), which is shorthand for 
+called [Reflective DLL Injection](https://www.andreafortuna.org/cybersecurity/what-is-reflective-dll-injection-and-how-can-be-detected/), which is shorthand for 
 saying that instead of loading a DLL from disk by invoking the Windows Loader (LDR) using `LoadLibrary()`,
 we implement our very own loader which allocates and fills the necessary memory blocks for each section
 of the DLL, binds the imports, applies the relocations and calls the DLL entry point. This technique is
@@ -340,23 +340,24 @@ Level 2: Finding the Secret Console
 
  ![level2-winmain](./level2-dllmain.png)
 
- This function contains a bit of a surprise: an `INT 3` in the middle of the function. Also,
+ This function contains a bit of a surprise: an `INT 3` right in the middle of normal program flow. In addition,
  IDA is giving us the hint that `sub_100010F0` never returns by putting the long dashed line
  comment under it. Indeed, if we look at this sub, we find that it just pops up a failure message.
  We're probably looking at some anti-debug trickery and more likely than not, execution flow
- will probably continue with `sub_100010D0` called at the end of this function. Stil, it's
+ will continue with `sub_100010D0` which is called at the end of this function. Still, it's
  interesting to pick this particular trick apart. The first section of the `sub_100010F0` sets
  up two exception handlers using [`AddVectoredExceptionHandler()`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms679274(v=vs.85).aspx).
  The first handler sub has been automatically renamed to `Handler` by IDA (it's at `0x10001260`)
  and the second is `sub_100011D0`. As the first parameter passed to [`AddVectoredExceptionHandler()`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms679274(v=vs.85).aspx)
- is zero, the two exception handlers will be called in the order they are registered.
-  Let's have a quick peek at them:
+ is zero in both cases, the two exception handlers will be called in the order they are registered.
+  Let's take a quick look at them:
 
 ![level2-handler1](./level2-handler1.png)
 
- This handler seems to check if `python27.dll` has been loaded by using [`GetModuleHandle()`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms683199(v=vs.85).aspx) and if
+ This handler seems to check if `python27.dll` has been loaded by looking for a non-zero result
+ from [`GetModuleHandle()`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms683199(v=vs.85).aspx) and if
  it finds it loaded, it sets the environment variable `mb_chal1` to a non-blank string derived
- from the process id. Loosely converted to 'C' this function looks like:
+ from the process id. Loosely converted to 'C', this function looks like:
 
  ```C
  LONG WINAPI handler1(struct _EXCEPTION_POINTERS *ExceptionInfo) {
@@ -381,7 +382,7 @@ that the result should be expressed in decimal. As an aside, the final call to `
 
 In summary, the first exception handler looks for a loaded module called `python27.dll` (the python runtime)
 and sets the environment variable `mb_chal1` to the process id if it finds it. Finally it tells the OS
-to continue searching for an exception handler.
+to continue searching for an exception handler by returning `EXCEPTION_CONTINUE_SEARCH`.
 
 The second handler is `sub_100011D0`:
 
@@ -435,7 +436,9 @@ The callback function itself sets up its stack cookie and exception handler and 
 
 ![level2-topcallback-1](./level2-topcallback-1.png)
 
-After initializing locals, the callback function sends windows message `0x0D`, which is [`WM_GETTEXT`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms632627(v=vs.85).aspx) to the `hWnd` (which is the handle to the current window in the enumeration),
+After initializing locals, the callback function sends windows message `0x0D`, which is
+ [`WM_GETTEXT`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms632627(v=vs.85).aspx)
+ to the `hWnd` (which is the handle to the current window in the enumeration),
 getting the result into the stack buffer at `lParam`.
 
 We can skip over the next bit that simply copies a long string to the stack. As the code is using
@@ -450,7 +453,8 @@ The next part is a bit more interesting:
 The top part of this section seems to be constructing some sort of object starting at `var_15C`.
 We can assume we are looking at an actual object because the calls to `sub_10004630` and 
 `sub_100051A0` pass a pointer to `var_15C` in the `ECX` register, which is the standard Microsoft
-calling convention for object methods (`__thiscall`). Figuring out what the rest of the
+calling convention for object methods ([`__thiscall`](https://msdn.microsoft.com/en-us/library/ek8tkfbw.aspx)).
+ Figuring out what the rest of the
  function does hinges on working out the class of this object. Let's collect what we know about it:
 
  1. Given the proximity of the initializations, the layout of the object looks like (size 0x18):
@@ -493,9 +497,9 @@ The best match for these properties is [`size_t std::string::find(const value_ty
 which returns `std::string::npos` (-1) when it fails to find a match.
 
 Now we're getting somewhere. The level 2 payload runs through all the top-level windows until it
-finds one with a caption that conatains both: `secret_console` and `Notepad` and then sets the
+finds one with a caption that contains both: `secret_console` and `Notepad` and then sets the
 caption of that window to the message `"Secret Console is waiting for the commands..."` (that's 
-the `SendMessage` with `Msg=0x0C` denoting [WM_SETTEXT](https://msdn.microsoft.com/en-us/library/windows/desktop/ms632644(v=vs.85).aspx))
+the `SendMessage` with `Msg=0x0C` denoting [`WM_SETTEXT`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms632644(v=vs.85).aspx))
 and activates it using `ShowWindow(hWnd, SW_SHOW)`.
 Let's trigger this behaviour by firing up `notepad secret_console` after running the CrackMe and passing level 1:
 
@@ -520,7 +524,7 @@ Finally, it enumerates all the child windows of the Notepad process with callbac
 ![level2-innercallback](./level2-innercallback.png)
 
 We see the same features we saw in the callback for the top level window enumaration: 
-[WM_SETTEXT](https://msdn.microsoft.com/en-us/library/windows/desktop/ms632644(v=vs.85).aspx),
+[`WM_GETTEXT`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms632627(v=vs.85).aspx),
 `std::string` construction and assignment (`sub_10004630`), `std::string::find` (`sub_100051A0`) etc.
 This time around, the text `dump_the_key` in an inner window caption will trigger a further action in the code. Let's type
 that in our 'secret console' notepad:
