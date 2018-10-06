@@ -146,7 +146,7 @@ We don't really need to decrypt the actual images, however it's fun to do so. If
 
 ![f1803 image crypter](./f1803-image-crypter.png)
 
-We can infer that `sub_401540' plays the role of `setkey()` as its two arguments are the cipher
+We can infer that `sub_401540` plays the role of `setkey()` as its two arguments are the cipher
 context (a 256-byte area on that stack at `ebp+var104`) and the password (remember that `__fastcall`
 calling convention is being used, and the first argument is in `ecx` and passed straight through
 to `sub_401540`). The 256-byte context is the hallmark of [RC4][RC4], and we can easily confirm that
