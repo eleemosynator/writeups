@@ -342,7 +342,8 @@ Level 2: Finding the Secret Console
 
  This function contains a bit of a surprise: an `INT 3` right in the middle of normal program flow. In addition,
  IDA is giving us the hint that `sub_100010F0` never returns by putting the long dashed line
- comment under it. Indeed, if we look at this sub, we find that it just pops up a failure message.
+ comment under it. Indeed, if we look at this sub, we find that it just pops up a failure message
+and exits the process.
  We're probably looking at some anti-debug trickery and more likely than not, execution flow
  will continue with `sub_100010D0` which is called at the end of this function. Still, it's
  interesting to pick this particular trick apart. The first section of the `sub_100010F0` sets
@@ -442,8 +443,9 @@ After initializing locals, the callback function sends windows message `0x0D`, w
 getting the result into the stack buffer at `lParam`.
 
 We can skip over the next bit that simply copies a long string to the stack. As the code is using
-xmm registers, IDA misidentifies the string as `xmmword_10002338C`, but if you force it into
-ASCII, you'll find the message: `"Secret Console is waiting for the commands..."` The same piece
+[XMM](https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions#Registers) registers,
+ IDA misidentifies the string as `xmmword_10002338C`, but if you force it to convert it to
+ASCIIZ, you'll find the message: `"Secret Console is waiting for the commands..."` The same piece
 of code also calculates the length of this messages and stores in `ESI`.
 
 The next part is a bit more interesting:
@@ -463,7 +465,7 @@ calling convention for object methods ([`__thiscall`](https://msdn.microsoft.com
   0x10	DWORD		var_14C = 0
   0x14	DWORD		var_148 = 0x0F
 ```
- 2. Post intialization, method `sub_10004630` is called with an ASCIIZ string as first parameter (the window text) and the length of the string as second.
+ 2. Post intialization, method `sub_10004630` is called with an ASCII string as first parameter (the window text) and the length of the string as second.
  3. When the object is used between `0x10005874` and `0x10005887`, it's either used as a byte array starting at `var_15C` or
     as a pointer storing in `var_15C` depending whether field `var_148` has a value greater or equal to 16.
 
@@ -652,7 +654,7 @@ Now we can separate the ciphertext into three groups corresponding to each of th
 
 Notice that all the bytes in the first and third groups (printed on the first and third lines) have bit 7 set.
 As this ciphertext should decrypt to Python code (ASCII), we can be sure that the first and third characters
-of the key have bit 7 set. Let's strip that part out by decrypting using the key `\x80\x00\x80'. As the XOR cipher
+of the key have bit 7 set. Let's strip that part out by decrypting using the key `'\x80\x00\x80'`. As the XOR cipher
 is linear, we can perform successive decryptions as we discover bits of the key and then xor all our partial keys
 together to get to the full key:
 
