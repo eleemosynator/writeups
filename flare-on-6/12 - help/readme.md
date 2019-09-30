@@ -625,7 +625,7 @@ interesting set of imports:
 All the functions with the `Fwp` prefix (e.g. [`FwpmFilterAdd0`]) are part of the [Windows Filtering Platform],
 which is an API that provides full network filtering access for all network layers. It can be used to
 implement firewall functionality (including Deep Packet Inspection), transparent socket encryption and
-much more. On the-flip side, it is quite complicated to use making `stmedit` quite hard to reverse.<sup id="#a_stmedit">[7](#f_stmedit)</sup>
+much more. On the-flip side, it is quite complicated to use making `stmedit` quite hard to reverse.<sup id="a_stmedit">[7](#f_stmedit)</sup>
 
 Thankfully we don't actually need to dive into `stmedit`. The three `ioctl` commands issued to `\Driver\FLND`
 after plugin installation look like the contain the corresponding keys:
@@ -1036,15 +1036,15 @@ What a journey! This was the first forensic challenge I have ever done and it I 
 cleatext communication in the code), hard-core kernel hackery (reflectively loading kernel drivers),
 malware paraphernalia (encrypted stack strings, plugin-based platforms) with a bit of cryptanalysis
 and some plain old password brute-guessing on the side. Every puzzle had multiple solutions suited
-to different skillset and the whole experience was fascinating. Even though it wasn't the hardest
+to different skillsets and the whole experience was fascinating. Even though it wasn't the hardest
 challenge I've ever done, it was definitely the most engaging and the one I've spent the most time on.
-Thank you again Ryan Warns [@NOPAndRoll] and thanks to the FLARE team, [@nickharbour] for organizing
+Thank you again Ryan Warns ([@NOPAndRoll]) and thanks to the FLARE team, [@nickharbour] for organizing
 and [@fireeye] for sponsoring the Flare-On challenge.
 
 My route through the challenge is pretty much as described, except that I failed to pull off the brute-guessing
 bit due to the dumbest bug ever (outer brute loop didn't exit on winning, so 'WIN' message had scrolled
 off the top when I checked back, and things went downhill from there - ALWAYS LOG EVERYTHING), and I
-also failed to scan for the more distinct part of the password, so I resorted to reversing `i8042prt.sys`
+also failed to scan for the more distinctive part of the password, so I resorted to reversing `i8042prt.sys`
 and lifting the password out of the keyboard buffer. I also worked on extracting the flag straight from
 the [KeePass] process, but I only completed that after I had finished the keyboard approach. All in, I
 had great fun and learned quite a lot.
@@ -1053,7 +1053,7 @@ Personal thanks go out to [@Dark_Puzzle] for pointing out the right way to scan 
 and [@LeeAtBenf] for proofreading my rantings and providing some decent and constructive feedback
 some of which was taken on board - also the spellchecker suggestion helped.
 Additional thanks go out to Randall Munroe of [xkcd](https://xkcd.com) for his permissive license that
-allowed Black Hat of [Laser Pointer](https://what-if.xkcd.com/13/) pointer fame, who helper spur us
+allowed Black Hat of [Laser Pointer](https://what-if.xkcd.com/13/) fame, who helper spur us
 on to deeper driver spelunking. Also his hand-writing font came in handy for marking up disassemblies.
 
 I hope you enjoyed reading this guide, and remember:
