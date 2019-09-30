@@ -625,7 +625,7 @@ interesting set of imports:
 All the functions with the `Fwp` prefix (e.g. [`FwpmFilterAdd0`]) are part of the [Windows Filtering Platform],
 which is an API that provides full network filtering access for all network layers. It can be used to
 implement firewall functionality (including Deep Packet Inspection), transparent socket encryption and
-much more. On the-flip side, it is quite complicated to use making `stmedit` quite hard to reverse.<sup id="#stmedit">[7](#f_stmedit)</sup>
+much more. On the-flip side, it is quite complicated to use making `stmedit` quite hard to reverse.<sup id="#a_stmedit">[7](#f_stmedit)</sup>
 
 Thankfully we don't actually need to dive into `stmedit`. The three `ioctl` commands issued to `\Driver\FLND`
 after plugin installation look like the contain the corresponding keys:
@@ -1049,8 +1049,12 @@ and lifting the password out of the keyboard buffer. I also worked on extracting
 the [KeePass] process, but I only completed that after I had finished the keyboard approach. All in, I
 had great fun and learned quite a lot.
 
-Personal thanks go out to [@Dark_Puzzle] for pointing out the right way to scan for the password and
-[@LeeAtBenf] for proofreading my rantings.
+Personal thanks go out to [@Dark_Puzzle] for pointing out the right way to scan for the password,
+and [@LeeAtBenf] for proofreading my rantings and providing some decent and constructive feedback
+some of which was taken on board - also the spellchecker suggestion helped.
+Additional thanks go out to Randall Munroe of [xkcd](https://xkcd.com) for his permissive license that
+allowed Black Hat of [Laser Pointer](https://what-if.xkcd.com/13/) pointer fame, who helper spur us
+on to deeper driver spelunking. Also his hand-writing font came in handy for marking up disassemblies.
 
 I hope you enjoyed reading this guide, and remember:
 
