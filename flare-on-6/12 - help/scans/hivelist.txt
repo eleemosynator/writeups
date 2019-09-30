@@ -1,0 +1,15 @@
+Virtual            Physical           Name
+------------------ ------------------ ----
+0xfffff8a001ddf010 0x0000000075ff7010 \??\C:\System Volume Information\Syscache.hve
+0xfffff8a003e76010 0x0000000028230010 \??\C:\Windows\ServiceProfiles\LocalService\NTUSER.DAT
+0xfffff8a003e92010 0x0000000021362010 \SystemRoot\System32\Config\DEFAULT
+0xfffff8a00000d250 0x000000002d5c4250 [no name]
+0xfffff8a000024010 0x000000002d62f010 \REGISTRY\MACHINE\SYSTEM
+0xfffff8a000057010 0x000000002d5a2010 \REGISTRY\MACHINE\HARDWARE
+0xfffff8a00029c010 0x00000000298d9010 \Device\HarddiskVolume1\Boot\BCD
+0xfffff8a000800010 0x000000002911c010 \SystemRoot\System32\Config\SOFTWARE
+0xfffff8a000cbe010 0x00000000285e0010 \SystemRoot\System32\Config\SECURITY
+0xfffff8a000cdb410 0x000000001ea9a410 \SystemRoot\System32\Config\SAM
+0xfffff8a000d84410 0x0000000028167410 \??\C:\Windows\ServiceProfiles\NetworkService\NTUSER.DAT
+0xfffff8a000fe6410 0x0000000018472410 \??\C:\Users\FLARE ON 2019\ntuser.dat
+0xfffff8a001039410 0x0000000026fc3410 \??\C:\Users\FLARE ON 2019\AppData\Local\Microsoft\Windows\UsrClass.dat

@@ -1,0 +1,604 @@
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873
+xref at: 16ae: 34 stack bytes at delta 0080
+ctext: 6eebe2288886f99dbc1339ec06f76c01646cc0f7c082bc38, key: 75e19ac4
+decode: a"ZwQuerySystemInformation"
+xref at: 1ffd: 27 stack bytes at delta 0153
+ctext: c9b6bc769f7b1e59b6cee74f5f9f126ef4586f, key: 09413d5b
+decode: a"MmSectionObjectType"
+xref at: 20c6: 23 stack bytes at delta 014a
+ctext: c88875116280085d3e877205a8d8a978a7cc, key: 63fd50fb
+decode: a"IoDriverObjectType"
+xref at: 217e: 19 stack bytes at delta 05ce
+ctext: 440b606d54f1803f6f7c03db18f8, key: a9d1b9d2
+decode: a"ObCreateObject"
+xref at: 222e: 18 stack bytes at delta 0643
+ctext: 8392fe6587d74c0cd087526d, key: 82dc377b
+decode: u"Driver"
+xref at: 233e: 30 stack bytes at delta 0619
+ctext: 840a84982049d16aa2051f822108d0022e7930133d304bbe, key: bbfd6ac2
+decode: u"FLARE_Loaded"
+xref at: 23ee: 18 stack bytes at delta 016b
+ctext: 23c9ea248973b05ca5266164, key: 39dbba7a
+decode: u"FLSTRM"
+xref at: 2dcd: 28 stack bytes at delta 00ff
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 31cf: 0 stack bytes at delta 0020
+ABORTING XREF AT 31cf
+xref at: 33e1: 32 stack bytes at delta 0088
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 3687: 25 stack bytes at delta 00f8
+ctext: 8cb39ae5e13ee79eed540f8fbd9ea2f04b108b, key: d91d1b94
+decode: a"RtlCreateUserThread"
+xref at: 36e5: 0 stack bytes at delta 0020
+ABORTING XREF AT 36e5
+xref at: 392e: 0 stack bytes at delta 0020
+ABORTING XREF AT 392e
+xref at: 3af8: 29 stack bytes at delta 00c8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 40e7: 30 stack bytes at delta 00b8
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 46b7: 37 stack bytes at delta 00bb
+ctext: 3920308798487380a08bbd2fc287a90b1cb8be2c725732, key: ddfb7b49
+decode: a"ZwAllocateVirtualMemory"
+xref at: 4a45: 29 stack bytes at delta 0118
+ctext: 587730c512c1e2d5b6e078e6c00325c525f7bd, key: 48db7c49
+decode: a"ZwFreeVirtualMemory"
+xref at: 5873: 0 stack bytes at delta 0020
+ABORTING XREF AT 5873

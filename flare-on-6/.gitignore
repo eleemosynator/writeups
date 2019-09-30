@@ -1,0 +1,14 @@
+*.swp
+*.pyc
+*.un~
+*.dmp
+*.pcap
+*.pcapng
+*.exe
+*.pdb
+*.til
+*.nam
+*.id?
+*.idb
+*.i64
+

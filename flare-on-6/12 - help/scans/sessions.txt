@@ -1,0 +1,58 @@
+**************************************************
+Session(V): fffff880031f9000 ID: 0 Processes: 26
+PagedPoolStart: fffff900c0000000 PagedPoolEnd fffff920bfffffff
+ Process: 300 csrss.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 352 wininit.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 464 services.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 480 lsass.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 488 lsm.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 596 svchost.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 656 vmacthlp.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 696 svchost.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 740 svchost.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 820 svchost.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 876 svchost.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 1020 svchost.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 532 svchost.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 1212 spoolsv.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 1260 svchost.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 1608 VGAuthService. 2019-07-02 03:22:13 UTC+0000
+ Process: 1672 vmtoolsd.exe 2019-07-02 03:22:13 UTC+0000
+ Process: 1896 svchost.exe 2019-07-02 03:22:13 UTC+0000
+ Process: 2008 WmiPrvSE.exe 2019-07-02 03:22:13 UTC+0000
+ Process: 1416 dllhost.exe 2019-07-02 03:22:13 UTC+0000
+ Process: 1876 msdtc.exe 2019-07-02 03:22:15 UTC+0000
+ Process: 2232 SearchIndexer. 2019-07-02 03:22:18 UTC+0000
+ Process: 2136 svchost.exe 2019-07-02 03:23:05 UTC+0000
+ Process: 2984 svchost.exe 2019-07-02 03:24:13 UTC+0000
+ Process: 2880 sppsvc.exe 2019-07-02 03:24:13 UTC+0000
+ Process: 284 svchost.exe 2019-07-02 03:24:14 UTC+0000
+ Image: 0xfffffa800237dec0, Address fffff960000e0000, Name: win32k.sys
+ Image: 0xfffffa800300cc10, Address fffff96000570000, Name: TSDDD.dll
+**************************************************
+Session(V): fffff880035e0000 ID: 1 Processes: 22
+PagedPoolStart: fffff900c0000000 PagedPoolEnd fffff920bfffffff
+ Process: 360 csrss.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 396 winlogon.exe 2019-07-02 03:22:11 UTC+0000
+ Process: 1108 dwm.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 1124 explorer.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 1268 taskhost.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 1352 vmtoolsd.exe 2019-07-02 03:22:12 UTC+0000
+ Process: 2392 cmd.exe 2019-07-02 03:23:23 UTC+0000
+ Process: 2488 conhost.exe 2019-07-02 03:23:23 UTC+0000
+ Process: 2508 procexp64.exe 2019-07-02 03:25:33 UTC+0000
+ Process: 2936 cmd.exe 2019-07-02 03:28:04 UTC+0000
+ Process: 2720 conhost.exe 2019-07-02 03:28:04 UTC+0000
+ Process: 1336 chrome.exe 2019-07-02 03:40:00 UTC+0000
+ Process: 1976 chrome.exe 2019-07-02 03:40:00 UTC+0000
+ Process: 2852 chrome.exe 2019-07-02 03:40:00 UTC+0000
+ Process: 1716 chrome.exe 2019-07-02 03:40:01 UTC+0000
+ Process: 2660 chrome.exe 2019-07-02 03:40:01 UTC+0000
+ Process: 2836 chrome.exe 2019-07-02 03:40:01 UTC+0000
+ Process: 3248 cmd.exe 2019-08-02 14:24:04 UTC+0000
+ Process: 3488 conhost.exe 2019-08-02 14:24:04 UTC+0000
+ Process: 4648 chrome.exe 2019-08-02 14:34:07 UTC+0000
+ Process: 3844 chrome.exe 2019-08-02 14:35:07 UTC+0000
+ Process: 2648 KeePass.exe 2019-08-02 14:37:12 UTC+0000
+ Image: 0xfffffa8003016df0, Address fffff960000e0000, Name: win32k.sys
+ Image: 0xfffffa800302a410, Address fffff96000610000, Name: cdd.dll

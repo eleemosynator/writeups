@@ -1,0 +1,27 @@
+_DMP_HEADER64:
+ Majorversion:         0x0000000f (15)
+ Minorversion:         0x00001db1 (7601)
+ KdSecondaryVersion    0x00000002
+ DirectoryTableBase    0x00187000
+ PfnDataBase           0xfffff80002cf7278
+ PsLoadedModuleList    0xfffff80002c8d890
+ PsActiveProcessHead   0xfffff80002c6f590
+ MachineImageType      0x00008664
+ NumberProcessors      0x00000001
+ BugCheckCode          0x0000007e
+ KdDebuggerDataBlock   0xfffff80002c390a0
+ ProductType           0x00000001
+ SuiteMask             0x00000310
+ WriterStatus          0x80000000
+ Comment               PAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGEPAGE
+ DumpType              Full Dump
+ SystemTime            2019-08-02 14:38:33 UTC+0000
+ SystemUpTime          0:49:18.389777
+
+Physical Memory Description:
+Number of runs: 3
+FileOffset    Start Address    Length
+00002000      7ff7e000         00000000
+00002000      00001000         00000000
+00002000      0009e000         00000000
+00001000      0009d000

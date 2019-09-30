@@ -1,0 +1,39 @@
+xref at: 180001799: 15 stack bytes at delta 03c0
+ctext: c0f4264af55e, key: ff8b3f01
+decode: a"ws2_32"
+xref at: 180001869: 22 stack bytes at delta 03e9
+ctext: d7dcc00a4695bd10d22bd0fed9ca1d73, key: 20dbf93f
+decode: u"kernel32"
+xref at: 180001901: 15 stack bytes at delta 03a2
+ctext: cb44b287280985d78115, key: afab6008
+decode: a"WSAStartup"
+xref at: 180001979: 11 stack bytes at delta 0416
+ctext: 73200edf3563, key: e0a8fa1e
+decode: a"socket"
+xref at: 1800019fa: 14 stack bytes at delta 03d1
+ctext: b14c23058cad177ff5, key: f84fbbda
+decode: a"inet_addr"
+xref at: 180001a6a: 10 stack bytes at delta 0367
+ctext: 0537d387ff, key: d0182e82
+decode: a"htons"
+xref at: 180001ad2: 9 stack bytes at delta 03bb
+ctext: 856db4ff, key: 103db284
+decode: a"send"
+xref at: 180001b7a: 17 stack bytes at delta 038b
+ctext: e50529773a5c8fe9f0b665b3, key: 9cdbf142
+decode: a"LoadLibraryA"
+xref at: 180001beb: 12 stack bytes at delta 0257
+ctext: 86df1018c12b91, key: 9a124a69
+decode: a"connect"
+xref at: 180001c63: 11 stack bytes at delta 040e
+ctext: 99e2363ac4db, key: bfec0f13
+decode: a"msvcrt"
+xref at: 180001cdb: 11 stack bytes at delta 0363
+ctext: 8b3d8a5e34eb, key: 7283163c
+decode: a"malloc"
+xref at: 180001d43: 9 stack bytes at delta 03b7
+ctext: 78fa83d1, key: 0bc57b04
+decode: a"free"
+xref at: 180001de3: 16 stack bytes at delta 0403
+ctext: d9d8e02097cfae97759373, key: b675d2d5
+decode: a"closesocket"

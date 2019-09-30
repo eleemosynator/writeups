@@ -1,0 +1,32 @@
+xref at: 180001750: 15 stack bytes at delta 02b8
+ctext: 95a8a2bf04cf6a96, key: a89dcfd6
+decode: a"advapi32"
+xref at: 1800017f8: 17 stack bytes at delta 0203
+ctext: c2220aac0396203d6e60dadc, key: 578df4b6
+decode: a"GetUserNameA"
+xref at: 1800018c8: 22 stack bytes at delta 02b1
+ctext: e97ca1623c5940fe0ce5acc82f6f75d4c2, key: 3d6f988b
+decode: a"RtlCompressBuffer"
+xref at: 180001970: 17 stack bytes at delta 0217
+ctext: 3e092414cedd46e66654374d, key: 1069ec97
+decode: a"LoadLibraryA"
+xref at: 180001aa8: 35 stack bytes at delta 0296
+ctext: de5427ecb348fe4edb8b315822fadb67a015f96d01596eb11bd61ed7af5a, key: 5c53fda6
+decode: a"RtlGetCompressionWorkSpaceSize"
+xref at: 180001b18: 10 stack bytes at delta 0265
+ctext: 996e0c5bdc, key: a90d32ad
+decode: a"ntdll"
+xref at: 180001bb1: 17 stack bytes at delta 022c
+ctext: 38ee68cfa56ee4f960977f05, key: bb677f63
+decode: a"VirtualAlloc"
+xref at: 180001c81: 22 stack bytes at delta 0241
+ctext: 051efe2522466b3fb61a35dccf6f8cf3, key: 2da1597f
+decode: u"kernel32"
+xref at: 180001d39: 19 stack bytes at delta 029b
+ctext: 3ad5a3a0a5efac668e2e806dce7a, key: 061d5d1c
+decode: a"GetProcAddress"
+xref at: 180001dd9: 16 stack bytes at delta 025b
+ctext: 42ed33db5dc0fd7c24ee37, key: d0d6c630
+decode: a"VirtualFree"
+xref at: 18000212f: 0 stack bytes at delta 0020
+ABORTING XREF AT 18000212f

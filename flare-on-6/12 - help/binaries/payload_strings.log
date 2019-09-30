@@ -1,0 +1,542 @@
+xref at: 18000177f: 24 stack bytes at delta 01f9
+xref at: 18000177f: 24 stack bytes at delta 01f9
+xref at: 18000177f: 24 stack bytes at delta 01f9
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000181f: 16 stack bytes at delta 01d3
+ctext: bd642046adade87a397c26, key: 91e8a57d
+decode: a"CreateFileA"
+xref at: 18000188e: 17 stack bytes at delta 009c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 1800018f7: 11 stack bytes at delta 0206
+ctext: 87084923bf21, key: 8625e471
+decode: a"msvcrt"
+xref at: 180001977: 12 stack bytes at delta 01e3
+ctext: 1925decf843121, key: 52c00442
+decode: a"sprintf"
+xref at: 180001b81: 25 stack bytes at delta 00b9
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180001c0e: 20 stack bytes at delta 00c3
+ctext: 7e2f1a6770639022a161a9aff20290, key: fbe54ecb
+decode: a"DeviceIoControl"
+xref at: 180001ea1: 24 stack bytes at delta 0091
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180001f10: 17 stack bytes at delta 0074
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180001f7a: 16 stack bytes at delta 007f
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 1800021b2: 22 stack bytes at delta 0101
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000224b: 17 stack bytes at delta 00c4
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 1800022eb: 16 stack bytes at delta 00eb
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 18000238b: 16 stack bytes at delta 0113
+ctext: 051b5a53d1100592194c91, key: 77895bfb
+decode: a"VirtualFree"
+xref at: 1800025c1: 24 stack bytes at delta 0099
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000262b: 16 stack bytes at delta 0087
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 180002791: 24 stack bytes at delta 0099
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 1800027fb: 16 stack bytes at delta 0087
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 1800029c0: 24 stack bytes at delta 00c1
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180002a2f: 17 stack bytes at delta 007c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180002a8f: 11 stack bytes at delta 00ab
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 180002ae8: 9 stack bytes at delta 00cc
+ctext: 763a3a3f, key: 24949586
+decode: a"recv"
+xref at: 180002ccd: 27 stack bytes at delta 00e1
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180002d3c: 17 stack bytes at delta 008c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180002d9c: 11 stack bytes at delta 00c3
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 180002df5: 9 stack bytes at delta 0110
+ctext: 763a3a3f, key: 24949586
+decode: a"recv"
+xref at: 180002e95: 16 stack bytes at delta 010b
+ctext: 0c3411276f6a47a604b78c, key: c0050fa1
+decode: a"closesocket"
+xref at: 180002f2e: 17 stack bytes at delta 00bc
+ctext: 2d23458979861f266c5674f6, key: dc5332ea
+decode: a"VirtualAlloc"
+xref at: 180002fbf: 16 stack bytes at delta 00f3
+ctext: 051b5a53d1100592194c91, key: 77895bfb
+decode: a"VirtualFree"
+xref at: 1800033af: 14 stack bytes at delta 02db
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 18000347f: 22 stack bytes at delta 0309
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180003517: 15 stack bytes at delta 02f3
+ctext: 647297f8f5c369ffb098, key: 0753d351
+decode: a"WSAStartup"
+xref at: 18000358f: 11 stack bytes at delta 035e
+ctext: eeceb3e116b5, key: 30ec436e
+decode: a"socket"
+xref at: 18000361f: 14 stack bytes at delta 02e9
+ctext: 43693b3cafc03f834f, key: 9767d5d1
+decode: a"inet_addr"
+xref at: 18000368f: 10 stack bytes at delta 029f
+ctext: 4a654efbfe, key: 75813581
+decode: a"htons"
+xref at: 1800036f7: 9 stack bytes at delta 02df
+ctext: c245299f, key: dd7c6fbe
+decode: a"send"
+xref at: 18000379f: 17 stack bytes at delta 026c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 18000381f: 12 stack bytes at delta 032b
+ctext: 0b9f9540432713, key: 33284124
+decode: a"connect"
+xref at: 1800038c7: 17 stack bytes at delta 0324
+ctext: 55983158bd19da347327cd49, key: 07c808ad
+decode: a"CreateThread"
+xref at: 18000393f: 11 stack bytes at delta 0357
+ctext: 5ac4dac38fbd, key: 3dccd6c3
+decode: a"listen"
+xref at: 180003998: 9 stack bytes at delta 02b0
+ctext: b4fda71d, key: 737cdc6a
+decode: a"bind"
+xref at: 180003a38: 16 stack bytes at delta 034b
+ctext: 0c3411276f6a47a604b78c, key: c0050fa1
+decode: a"closesocket"
+xref at: 180003ad0: 15 stack bytes at delta 02b7
+ctext: 6b0dee5388ece953e468, key: cc6d3861
+decode: a"WSACleanup"
+xref at: 180003b48: 11 stack bytes at delta 0313
+ctext: 450165cf2f00, key: 3bb7c6e2
+decode: a"accept"
+xref at: 180003bc0: 11 stack bytes at delta 02aa
+ctext: e9512426b744, key: fd391ab4
+decode: a"select"
+xref at: 18000177f: 24 stack bytes at delta 01f9
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000181f: 16 stack bytes at delta 01d3
+ctext: bd642046adade87a397c26, key: 91e8a57d
+decode: a"CreateFileA"
+xref at: 18000188e: 17 stack bytes at delta 009c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 1800018f7: 11 stack bytes at delta 0206
+ctext: 87084923bf21, key: 8625e471
+decode: a"msvcrt"
+xref at: 180001977: 12 stack bytes at delta 01e3
+ctext: 1925decf843121, key: 52c00442
+decode: a"sprintf"
+xref at: 180001b81: 25 stack bytes at delta 00b9
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180001c0e: 20 stack bytes at delta 00c3
+ctext: 7e2f1a6770639022a161a9aff20290, key: fbe54ecb
+decode: a"DeviceIoControl"
+xref at: 180001ea1: 24 stack bytes at delta 0091
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180001f10: 17 stack bytes at delta 0074
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180001f7a: 16 stack bytes at delta 007f
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 1800021b2: 22 stack bytes at delta 0101
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000224b: 17 stack bytes at delta 00c4
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 1800022eb: 16 stack bytes at delta 00eb
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 18000238b: 16 stack bytes at delta 0113
+ctext: 051b5a53d1100592194c91, key: 77895bfb
+decode: a"VirtualFree"
+xref at: 1800025c1: 24 stack bytes at delta 0099
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000262b: 16 stack bytes at delta 0087
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 180002791: 24 stack bytes at delta 0099
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 1800027fb: 16 stack bytes at delta 0087
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 1800029c0: 24 stack bytes at delta 00c1
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180002a2f: 17 stack bytes at delta 007c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180002a8f: 11 stack bytes at delta 00ab
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 180002ae8: 9 stack bytes at delta 00cc
+ctext: 763a3a3f, key: 24949586
+decode: a"recv"
+xref at: 180002ccd: 27 stack bytes at delta 00e1
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180002d3c: 17 stack bytes at delta 008c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180002d9c: 11 stack bytes at delta 00c3
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 180002df5: 9 stack bytes at delta 0110
+ctext: 763a3a3f, key: 24949586
+decode: a"recv"
+xref at: 180002e95: 16 stack bytes at delta 010b
+ctext: 0c3411276f6a47a604b78c, key: c0050fa1
+decode: a"closesocket"
+xref at: 180002f2e: 17 stack bytes at delta 00bc
+ctext: 2d23458979861f266c5674f6, key: dc5332ea
+decode: a"VirtualAlloc"
+xref at: 180002fbf: 16 stack bytes at delta 00f3
+ctext: 051b5a53d1100592194c91, key: 77895bfb
+decode: a"VirtualFree"
+xref at: 1800033af: 14 stack bytes at delta 02db
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 18000347f: 22 stack bytes at delta 0309
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180003517: 15 stack bytes at delta 02f3
+ctext: 647297f8f5c369ffb098, key: 0753d351
+decode: a"WSAStartup"
+xref at: 18000358f: 11 stack bytes at delta 035e
+ctext: eeceb3e116b5, key: 30ec436e
+decode: a"socket"
+xref at: 18000361f: 14 stack bytes at delta 02e9
+ctext: 43693b3cafc03f834f, key: 9767d5d1
+decode: a"inet_addr"
+xref at: 18000368f: 10 stack bytes at delta 029f
+ctext: 4a654efbfe, key: 75813581
+decode: a"htons"
+xref at: 1800036f7: 9 stack bytes at delta 02df
+ctext: c245299f, key: dd7c6fbe
+decode: a"send"
+xref at: 18000379f: 17 stack bytes at delta 026c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 18000381f: 12 stack bytes at delta 032b
+ctext: 0b9f9540432713, key: 33284124
+decode: a"connect"
+xref at: 1800038c7: 17 stack bytes at delta 0324
+ctext: 55983158bd19da347327cd49, key: 07c808ad
+decode: a"CreateThread"
+xref at: 18000393f: 11 stack bytes at delta 0357
+ctext: 5ac4dac38fbd, key: 3dccd6c3
+decode: a"listen"
+xref at: 180003998: 9 stack bytes at delta 02b0
+ctext: b4fda71d, key: 737cdc6a
+decode: a"bind"
+xref at: 180003a38: 16 stack bytes at delta 034b
+ctext: 0c3411276f6a47a604b78c, key: c0050fa1
+decode: a"closesocket"
+xref at: 180003ad0: 15 stack bytes at delta 02b7
+ctext: 6b0dee5388ece953e468, key: cc6d3861
+decode: a"WSACleanup"
+xref at: 180003b48: 11 stack bytes at delta 0313
+ctext: 450165cf2f00, key: 3bb7c6e2
+decode: a"accept"
+xref at: 180003bc0: 11 stack bytes at delta 02aa
+ctext: e9512426b744, key: fd391ab4
+decode: a"select"
+xref at: 18000177f: 24 stack bytes at delta 01f9
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000181f: 16 stack bytes at delta 01d3
+ctext: bd642046adade87a397c26, key: 91e8a57d
+decode: a"CreateFileA"
+xref at: 18000188e: 17 stack bytes at delta 009c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 1800018f7: 11 stack bytes at delta 0206
+ctext: 87084923bf21, key: 8625e471
+decode: a"msvcrt"
+xref at: 180001977: 12 stack bytes at delta 01e3
+ctext: 1925decf843121, key: 52c00442
+decode: a"sprintf"
+xref at: 180001b81: 25 stack bytes at delta 00b9
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180001c0e: 20 stack bytes at delta 00c3
+ctext: 7e2f1a6770639022a161a9aff20290, key: fbe54ecb
+decode: a"DeviceIoControl"
+xref at: 180001ea1: 24 stack bytes at delta 0091
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180001f10: 17 stack bytes at delta 0074
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180001f7a: 16 stack bytes at delta 007f
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 1800021b2: 22 stack bytes at delta 0101
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000224b: 17 stack bytes at delta 00c4
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 1800022eb: 16 stack bytes at delta 00eb
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 18000238b: 16 stack bytes at delta 0113
+ctext: 051b5a53d1100592194c91, key: 77895bfb
+decode: a"VirtualFree"
+xref at: 1800025c1: 24 stack bytes at delta 0099
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000262b: 16 stack bytes at delta 0087
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 180002791: 24 stack bytes at delta 0099
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 1800027fb: 16 stack bytes at delta 0087
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 1800029c0: 24 stack bytes at delta 00c1
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180002a2f: 17 stack bytes at delta 007c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180002a8f: 11 stack bytes at delta 00ab
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 180002ae8: 9 stack bytes at delta 00cc
+ctext: 763a3a3f, key: 24949586
+decode: a"recv"
+xref at: 180002ccd: 27 stack bytes at delta 00e1
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180002d3c: 17 stack bytes at delta 008c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180002d9c: 11 stack bytes at delta 00c3
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 180002df5: 9 stack bytes at delta 0110
+ctext: 763a3a3f, key: 24949586
+decode: a"recv"
+xref at: 180002e95: 16 stack bytes at delta 010b
+ctext: 0c3411276f6a47a604b78c, key: c0050fa1
+decode: a"closesocket"
+xref at: 180002f2e: 17 stack bytes at delta 00bc
+ctext: 2d23458979861f266c5674f6, key: dc5332ea
+decode: a"VirtualAlloc"
+xref at: 180002fbf: 16 stack bytes at delta 00f3
+ctext: 051b5a53d1100592194c91, key: 77895bfb
+decode: a"VirtualFree"
+xref at: 1800033af: 14 stack bytes at delta 02db
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 18000347f: 22 stack bytes at delta 0309
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180003517: 15 stack bytes at delta 02f3
+ctext: 647297f8f5c369ffb098, key: 0753d351
+decode: a"WSAStartup"
+xref at: 18000358f: 11 stack bytes at delta 035e
+ctext: eeceb3e116b5, key: 30ec436e
+decode: a"socket"
+xref at: 18000361f: 14 stack bytes at delta 02e9
+ctext: 43693b3cafc03f834f, key: 9767d5d1
+decode: a"inet_addr"
+xref at: 18000368f: 10 stack bytes at delta 029f
+ctext: 4a654efbfe, key: 75813581
+decode: a"htons"
+xref at: 1800036f7: 9 stack bytes at delta 02df
+ctext: c245299f, key: dd7c6fbe
+decode: a"send"
+xref at: 18000379f: 17 stack bytes at delta 026c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 18000381f: 12 stack bytes at delta 032b
+ctext: 0b9f9540432713, key: 33284124
+decode: a"connect"
+xref at: 1800038c7: 17 stack bytes at delta 0324
+ctext: 55983158bd19da347327cd49, key: 07c808ad
+decode: a"CreateThread"
+xref at: 18000393f: 11 stack bytes at delta 0357
+ctext: 5ac4dac38fbd, key: 3dccd6c3
+decode: a"listen"
+xref at: 180003998: 9 stack bytes at delta 02b0
+ctext: b4fda71d, key: 737cdc6a
+decode: a"bind"
+xref at: 180003a38: 16 stack bytes at delta 034b
+ctext: 0c3411276f6a47a604b78c, key: c0050fa1
+decode: a"closesocket"
+xref at: 180003ad0: 15 stack bytes at delta 02b7
+ctext: 6b0dee5388ece953e468, key: cc6d3861
+decode: a"WSACleanup"
+xref at: 180003b48: 11 stack bytes at delta 0313
+ctext: 450165cf2f00, key: 3bb7c6e2
+decode: a"accept"
+xref at: 180003bc0: 11 stack bytes at delta 02aa
+ctext: e9512426b744, key: fd391ab4
+decode: a"select"
+xref at: 18000177f: 24 stack bytes at delta 01f9
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000181f: 16 stack bytes at delta 01d3
+ctext: bd642046adade87a397c26, key: 91e8a57d
+decode: a"CreateFileA"
+xref at: 18000188e: 17 stack bytes at delta 009c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 1800018f7: 11 stack bytes at delta 0206
+ctext: 87084923bf21, key: 8625e471
+decode: a"msvcrt"
+xref at: 180001977: 12 stack bytes at delta 01e3
+ctext: 1925decf843121, key: 52c00442
+decode: a"sprintf"
+xref at: 180001b81: 25 stack bytes at delta 00b9
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180001c0e: 20 stack bytes at delta 00c3
+ctext: 7e2f1a6770639022a161a9aff20290, key: fbe54ecb
+decode: a"DeviceIoControl"
+xref at: 180001ea1: 24 stack bytes at delta 0091
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180001f10: 17 stack bytes at delta 0074
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180001f7a: 16 stack bytes at delta 007f
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 1800021b2: 22 stack bytes at delta 0101
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000224b: 17 stack bytes at delta 00c4
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 1800022eb: 16 stack bytes at delta 00eb
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 18000238b: 16 stack bytes at delta 0113
+ctext: 051b5a53d1100592194c91, key: 77895bfb
+decode: a"VirtualFree"
+xref at: 1800025c1: 24 stack bytes at delta 0099
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 18000262b: 16 stack bytes at delta 0087
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 180002791: 24 stack bytes at delta 0099
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 1800027fb: 16 stack bytes at delta 0087
+ctext: b54ac8b22ccbbe0bdbbd6c, key: 77468f07
+decode: a"CloseHandle"
+xref at: 1800029c0: 24 stack bytes at delta 00c1
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180002a2f: 17 stack bytes at delta 007c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180002a8f: 11 stack bytes at delta 00ab
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 180002ae8: 9 stack bytes at delta 00cc
+ctext: 763a3a3f, key: 24949586
+decode: a"recv"
+xref at: 180002ccd: 27 stack bytes at delta 00e1
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180002d3c: 17 stack bytes at delta 008c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 180002d9c: 11 stack bytes at delta 00c3
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 180002df5: 9 stack bytes at delta 0110
+ctext: 763a3a3f, key: 24949586
+decode: a"recv"
+xref at: 180002e95: 16 stack bytes at delta 010b
+ctext: 0c3411276f6a47a604b78c, key: c0050fa1
+decode: a"closesocket"
+xref at: 180002f2e: 17 stack bytes at delta 00bc
+ctext: 2d23458979861f266c5674f6, key: dc5332ea
+decode: a"VirtualAlloc"
+xref at: 180002fbf: 16 stack bytes at delta 00f3
+ctext: 051b5a53d1100592194c91, key: 77895bfb
+decode: a"VirtualFree"
+xref at: 1800033af: 14 stack bytes at delta 02db
+ctext: 043579a27c36, key: 8a8902fe
+decode: a"ws2_32"
+xref at: 18000347f: 22 stack bytes at delta 0309
+ctext: d532461732ac0bd13f1c7c9a4821eb6a, key: 54d372cf
+decode: u"kernel32"
+xref at: 180003517: 15 stack bytes at delta 02f3
+ctext: 647297f8f5c369ffb098, key: 0753d351
+decode: a"WSAStartup"
+xref at: 18000358f: 11 stack bytes at delta 035e
+ctext: eeceb3e116b5, key: 30ec436e
+decode: a"socket"
+xref at: 18000361f: 14 stack bytes at delta 02e9
+ctext: 43693b3cafc03f834f, key: 9767d5d1
+decode: a"inet_addr"
+xref at: 18000368f: 10 stack bytes at delta 029f
+ctext: 4a654efbfe, key: 75813581
+decode: a"htons"
+xref at: 1800036f7: 9 stack bytes at delta 02df
+ctext: c245299f, key: dd7c6fbe
+decode: a"send"
+xref at: 18000379f: 17 stack bytes at delta 026c
+ctext: ef3077af2fc8e31ed256d49d, key: bb0a4741
+decode: a"LoadLibraryA"
+xref at: 18000381f: 12 stack bytes at delta 032b
+ctext: 0b9f9540432713, key: 33284124
+decode: a"connect"
+xref at: 1800038c7: 17 stack bytes at delta 0324
+ctext: 55983158bd19da347327cd49, key: 07c808ad
+decode: a"CreateThread"
+xref at: 18000393f: 11 stack bytes at delta 0357
+ctext: 5ac4dac38fbd, key: 3dccd6c3
+decode: a"listen"
+xref at: 180003998: 9 stack bytes at delta 02b0
+ctext: b4fda71d, key: 737cdc6a
+decode: a"bind"
+xref at: 180003a38: 16 stack bytes at delta 034b
+ctext: 0c3411276f6a47a604b78c, key: c0050fa1
+decode: a"closesocket"
+xref at: 180003ad0: 15 stack bytes at delta 02b7
+ctext: 6b0dee5388ece953e468, key: cc6d3861
+decode: a"WSACleanup"
+xref at: 180003b48: 11 stack bytes at delta 0313
+ctext: 450165cf2f00, key: 3bb7c6e2
+decode: a"accept"
+xref at: 180003bc0: 11 stack bytes at delta 02aa
+ctext: e9512426b744, key: fd391ab4
+decode: a"select"

@@ -1,0 +1,103 @@
+Offset(P)          Proto    Local Address                  Foreign Address      State            Pid      Owner          Created
+0x7d62e770         UDPv4    192.168.1.244:1900             *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7d6a7cf0         UDPv4    127.0.0.1:56043                *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7d6b3ec0         UDPv4    0.0.0.0:0                      *:*                                   1020     svchost.exe    2019-08-02 14:18:16 UTC+0000
+0x7d6be990         UDPv4    0.0.0.0:0                      *:*                                   1020     svchost.exe    2019-08-02 14:18:16 UTC+0000
+0x7d6be990         UDPv6    :::0                           *:*                                   1020     svchost.exe    2019-08-02 14:18:16 UTC+0000
+0x7d70c310         UDPv4    0.0.0.0:5353                   *:*                                   1336     chrome.exe     2019-08-02 14:18:31 UTC+0000
+0x7d70c310         UDPv6    :::5353                        *:*                                   1336     chrome.exe     2019-08-02 14:18:31 UTC+0000
+0x7d800260         UDPv4    0.0.0.0:50486                  *:*                                   532      svchost.exe    2019-07-02 03:40:07 UTC+0000
+0x7d800260         UDPv6    :::50486                       *:*                                   532      svchost.exe    2019-07-02 03:40:07 UTC+0000
+0x7d839010         UDPv6    ::1:1900                       *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7d85dda0         UDPv4    0.0.0.0:123                    *:*                                   1020     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7d85dda0         UDPv6    :::123                         *:*                                   1020     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7d85fda0         UDPv4    0.0.0.0:5355                   *:*                                   532      svchost.exe    2019-08-02 14:18:27 UTC+0000
+0x7d85fda0         UDPv6    :::5355                        *:*                                   532      svchost.exe    2019-08-02 14:18:27 UTC+0000
+0x7d861ec0         UDPv4    0.0.0.0:5355                   *:*                                   532      svchost.exe    2019-08-02 14:18:27 UTC+0000
+0x7d862010         UDPv4    192.168.1.244:138              *:*                                   4        System         2019-08-02 14:18:24 UTC+0000
+0x7d863010         UDPv4    192.168.1.244:137              *:*                                   4        System         2019-08-02 14:18:24 UTC+0000
+0x7d880820         UDPv4    0.0.0.0:0                      *:*                                   532      svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7d880820         UDPv6    :::0                           *:*                                   532      svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7d9c1130         UDPv4    192.168.1.244:56042            *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7daf8a10         UDPv6    ::1:56038                      *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7d7c91d0         TCPv4    0.0.0.0:4444                   0.0.0.0:0            LISTENING        876      svchost.exe    
+0x7d85bdc0         TCPv4    192.168.1.244:139              0.0.0.0:0            LISTENING        4        System         
+0x7d8c5ad0         TCPv4    0.0.0.0:1029                   0.0.0.0:0            LISTENING        480      lsass.exe      
+0x7d445010         TCPv4    192.168.1.244:1588             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7d626cf0         TCPv4    192.168.1.242:1578             192.168.1.232:8009   CLOSED           2660     chrome.exe     
+0x7d62acf0         TCPv4    192.168.1.244:1586             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7d6686c0         TCPv4    192.168.1.244:4444             192.168.1.243:1060   CLOSE_WAIT       876      svchost.exe    
+0x7d70d010         TCPv4    192.168.1.244:1633             192.168.1.243:8888   FIN_WAIT2        876      svchost.exe    
+0x7d7d2010         TCPv4    -:0                            56.75.74.3:0         CLOSED           876      svchost.exe    
+0x7d8bdae0         TCPv4    -:0                            56.107.135.1:0       CLOSED           1        0??????       
+0x7d8bfcf0         TCPv6    -:0                            386b:8701:80fa:ffff:386b:8701:80fa:ffff:0 CLOSED           532      svchost.exe    
+0x7d8dca90         TCPv4    -:0                            56.155.58.3:0        CLOSED           1        0??????       
+0x7d8e3300         TCPv4    192.168.1.244:1636             192.168.1.243:8888   FIN_WAIT2        876      svchost.exe    
+0x7d93b010         TCPv4    192.168.1.244:4444             192.168.1.243:1063   CLOSE_WAIT       876      svchost.exe    
+0x7d94e930         TCPv4    192.168.1.242:1305             192.168.1.232:8009   CLOSED           2660     chrome.exe     
+0x7d961010         TCPv4    192.168.1.244:1635             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7d96ecf0         TCPv4    192.168.1.244:1639             192.168.1.243:6666   FIN_WAIT2        876      svchost.exe    
+0x7d96f3f0         TCPv4    192.168.1.244:1610             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7d98c010         TCPv4    192.168.1.242:1061             192.168.1.232:8009   CLOSED           2660     chrome.exe     
+0x7db0a910         UDPv6    fe80::e472:88f6:c97a:3914:56039 *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7db2c1f0         UDPv4    0.0.0.0:500                    *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7db2ca00         UDPv4    0.0.0.0:500                    *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7db2ca00         UDPv6    :::500                         *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7db2d870         UDPv4    0.0.0.0:0                      *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7db2f9b0         UDPv4    0.0.0.0:4500                   *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7db74d60         UDPv6    ::1:56040                      *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7defc600         UDPv6    ::1:1900                       *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7df49010         UDPv4    0.0.0.0:5353                   *:*                                   1336     chrome.exe     2019-08-02 14:18:31 UTC+0000
+0x7df49010         UDPv6    :::5353                        *:*                                   1336     chrome.exe     2019-08-02 14:18:31 UTC+0000
+0x7e0f34c0         UDPv4    127.0.0.1:1900                 *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7e1faec0         UDPv4    0.0.0.0:5353                   *:*                                   1336     chrome.exe     2019-08-02 14:18:31 UTC+0000
+0x7e2d0d70         UDPv4    0.0.0.0:0                      *:*                                   2136     svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7e2d14a0         UDPv4    0.0.0.0:0                      *:*                                   2136     svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7e2d14a0         UDPv6    :::0                           *:*                                   2136     svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7def31b0         TCPv4    0.0.0.0:445                    0.0.0.0:0            LISTENING        4        System         
+0x7def31b0         TCPv6    :::445                         :::0                 LISTENING        4        System         
+0x7def3560         TCPv4    0.0.0.0:1028                   0.0.0.0:0            LISTENING        464      services.exe   
+0x7e09b9e0         TCPv4    0.0.0.0:1027                   0.0.0.0:0            LISTENING        876      svchost.exe    
+0x7e09b9e0         TCPv6    :::1027                        :::0                 LISTENING        876      svchost.exe    
+0x7e09bef0         TCPv4    0.0.0.0:1027                   0.0.0.0:0            LISTENING        876      svchost.exe    
+0x7e244010         TCPv4    0.0.0.0:135                    0.0.0.0:0            LISTENING        696      svchost.exe    
+0x7e24c9e0         TCPv4    0.0.0.0:135                    0.0.0.0:0            LISTENING        696      svchost.exe    
+0x7e24c9e0         TCPv6    :::135                         :::0                 LISTENING        696      svchost.exe    
+0x7e256360         TCPv4    0.0.0.0:1025                   0.0.0.0:0            LISTENING        352      wininit.exe    
+0x7e258830         TCPv4    0.0.0.0:1025                   0.0.0.0:0            LISTENING        352      wininit.exe    
+0x7e258830         TCPv6    :::1025                        :::0                 LISTENING        352      wininit.exe    
+0x7e263230         TCPv4    0.0.0.0:1029                   0.0.0.0:0            LISTENING        480      lsass.exe      
+0x7e263230         TCPv6    :::1029                        :::0                 LISTENING        480      lsass.exe      
+0x7e28b9e0         TCPv4    0.0.0.0:1026                   0.0.0.0:0            LISTENING        740      svchost.exe    
+0x7e28dc90         TCPv4    0.0.0.0:1026                   0.0.0.0:0            LISTENING        740      svchost.exe    
+0x7e28dc90         TCPv6    :::1026                        :::0                 LISTENING        740      svchost.exe    
+0x7e297a40         TCPv4    0.0.0.0:1031                   0.0.0.0:0            LISTENING        2136     svchost.exe    
+0x7e298580         TCPv4    0.0.0.0:1031                   0.0.0.0:0            LISTENING        2136     svchost.exe    
+0x7e298580         TCPv6    :::1031                        :::0                 LISTENING        2136     svchost.exe    
+0x7e3db2b0         TCPv4    127.0.0.1:139                  0.0.0.0:0            LISTENING        4        System         
+0x7db3f580         TCPv4    192.168.1.244:1638             192.168.1.243:6666   FIN_WAIT2        876      svchost.exe    
+0x7db61010         TCPv4    192.168.1.244:1632             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7dee3550         TCPv6    -:0                            384b:4a03:80fa:ffff:384b:4a03:80fa:ffff:0 CLOSED           876      svchost.exe    
+0x7e072010         TCPv4    192.168.1.244:1627             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7e12f730         TCPv4    -:1056                         -:443                CLOSED           2660     chrome.exe     
+0x7e31fcf0         TCPv4    192.168.1.244:1582             192.168.1.232:8009   ESTABLISHED      2660     chrome.exe     
+0x7e8106a0         UDPv4    127.0.0.1:138                  *:*                                   4        System         2019-07-02 03:22:20 UTC+0000
+0x7ebd7ec0         UDPv4    127.0.0.1:137                  *:*                                   4        System         2019-07-02 03:22:20 UTC+0000
+0x7e640740         TCPv4    0.0.0.0:1028                   0.0.0.0:0            LISTENING        464      services.exe   
+0x7e640740         TCPv6    :::1028                        :::0                 LISTENING        464      services.exe   
+0x7e63fab0         TCPv4    192.168.1.244:1590             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7f0a6ad0         UDPv4    192.168.1.244:63428            *:*                                   1336     chrome.exe     2019-08-02 14:38:28 UTC+0000
+0x7f2fd010         UDPv4    0.0.0.0:123                    *:*                                   1020     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7f32a670         UDPv4    127.0.0.1:1900                 *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7f3673f0         UDPv6    fe80::e472:88f6:c97a:3914:1900 *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7f5dc250         UDPv4    127.0.0.1:56041                *:*                                   2984     svchost.exe    2019-08-02 14:18:24 UTC+0000
+0x7f230cf0         TCPv4    192.168.1.244:1637             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7f290560         TCPv4    192.168.1.242:1576             192.168.1.232:8009   CLOSED           2660     chrome.exe     
+0x7f310010         TCPv4    192.168.1.244:1587             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7f338010         TCPv4    192.168.1.244:1634             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7f339010         TCPv4    192.168.1.244:1629             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7fdecec0         UDPv4    0.0.0.0:0                      *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7fdecec0         UDPv6    :::0                           *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7fb3d4f0         TCPv4    192.168.1.244:1608             192.168.1.243:7777   FIN_WAIT1        876      svchost.exe    
+0x7ffb4bb0         UDPv4    0.0.0.0:4500                   *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
+0x7ffb4bb0         UDPv6    :::4500                        *:*                                   876      svchost.exe    2019-07-02 03:23:05 UTC+0000
