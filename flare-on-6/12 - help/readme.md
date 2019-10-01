@@ -332,7 +332,7 @@ With these tools, the [`DriverEntry`] routine is fairly easy to read and can be 
 *  Keep pointer to [`DRIVER_OBJECT`] in `qword_C130` (renamed `g_pDriverObject`)
 *  Set `DriverUnload` to `sub_1220` (renamed `DriverUnload`)
 *  Keep copy of the registry path in `UNICODE_STRING64` structure at `0xC138` (renamed `g_RegistryPath`)
-*  Note that Kernel pool allocation are tagged with `"FLAR"` (`0x52414C46`)
+*  Note that Kernel pool allocations are tagged with `"FLAR"` (`0x52414C46`)
 *  Keep copy of the default `MajorFunction` dispatch handler passed in [`DRIVER_OBJECT`] in `0xC150` (renamed `g_pfnDispatchMJ`)
 *  Set all driver dispatch handlers to `sub_50B0`, which turns out to only handle `DeviceControl` (renamed `DispatchDeviceControl`)
 *  Call [`IoCreateDevice`] to create `\Device\FLID` of type `FILE_DEVICE_UNKNOWN` (`0x22`)
@@ -381,7 +381,7 @@ It's a bit surprising to see the PID of the target `svchost.exe` process hard-wi
 I guess that customization can be done during the infection process (also makes it harder for
 less well intentioned people to reuse `man.sys`).
 
-We have made a lot of progress, but there is still a lot of functionality in `man.sys` which is
+We have made quite a bit of progress, but there is still a lot of functionality in `man.sys` which is
 presumably exposed through `DeviceIoControl` calls. Let's switch to `payload.dll`, which gets
 installed at this stage of the infection.
 
@@ -392,7 +392,7 @@ the string deobfuscator, we can start with the single export at `0x3F80`:
 
 ![f1912-payload-entry](./assets/f1912-payload-entry.png)
 
-The argument to `sub_1800032A0` is 4444 - the port that seems to be listening for commands.
+The argument to `sub_1800032A0` is 4444 - the port we saw the malware listening on for commands.
 That's definitely a good start. The sub itself is fairly straightforward: It opens a socket,
 binds and listens on the target port and fires off a thread to deal with each accepted connection.
 The connection handler is at `sub_180002BD0` (renamed process packet), which does the following:
@@ -402,7 +402,7 @@ The connection handler is at `sub_180002BD0` (renamed process packet), which doe
 * Store the `packet_size` at the start of the allocated block.
 * Call `sub_1800028B0` to receive the remainder of the packet into the allocated block.
 * Then switch based on the long at offset 4 in the packet (`command_code`)
-* Once the packet is process, it closes the connection and exits the thread, hence each
+* Once the packet is processed, the listener closes the connection and exits the thread, hence each
 connection to 4444 is only ever used for a single command packet.
 
 The `command_code` switch looks like this:
@@ -423,9 +423,9 @@ get away with guessing a lot of this).
 
 |Network Command|`payload.dll` handler|Ioctl code|Driver handler|
 |---------------|-----------------------|---------|---------------|
-|`0x34B30F3B`|`sub_180001DE0(pkt_payload, 0, 1)`|`0x23BEAC`|`InjectPayloadIntoProcess(inj, 0, 1, 0)|`|
-|`0x8168AD41`|`sub_180001DE0(pkt_payload, 1, 0)`|`0x237BE8`|`InjectPayloadIntoProcess(inj, 1, 0, 0)|`|
-|`0xCD762BFA`|`sub_180001DE0(pkt_payload, 0, 0)`|`0x22AF34`|`InjectPayloadIntoProcess(inj, 0, 0, 0)|`|
+|`0x34B30F3B`|`sub_180001DE0(pkt_payload, 0, 1)`|`0x23BEAC`|`InjectPayloadIntoProcess(inj, 0, 1, 0)`|
+|`0x8168AD41`|`sub_180001DE0(pkt_payload, 1, 0)`|`0x237BE8`|`InjectPayloadIntoProcess(inj, 1, 0, 0)`|
+|`0xCD762BFA`|`sub_180001DE0(pkt_payload, 0, 0)`|`0x22AF34`|`InjectPayloadIntoProcess(inj, 0, 0, 0)`|
 |`0xD180DAB5`|`sub_180002080(pkt_payload)`|`0x22F378`|`sub_4580(...)`|
 |`0xD44D6B6C`|`sub_1800026F0(pkt_payload)`|`0x2337BC`|`sub_1DB0(...)`|
 |`0x427906F4`|`sub_180002520(pkt_payload)`||`DeviceIoControl(&pkt_payload[0], ...)`|
@@ -443,8 +443,8 @@ This is probably `call-plugin`.
 
 Now we've mapped out the core functionality in the driver and its payload dll (backdoor) and gained
 a basic understanding of the command codes of the core implant. But there is one thing that doesn't add
-up: The backdoor does implement any encryption, but the command packets we see on the wire are encrypted.
-It's possible that the driver comes with a 'vanilla' backdoor that deals with cleartext, but later downloads
+up: The backdoor does not implement any encryption, but the command packets we see on the wire are encrypted.
+It is possible that the driver comes with a 'vanilla' backdoor that deals with cleartext, but later downloads
 a more advanced version that implements the (relatively simple) encryption we saw on the wire. We suspect
 that the driver keeps dormant plugins encrypted, but the backdoor listener has to be in cleartext while it's still
 listening, therefore we should be able to locate it. As we've already created a [Yara] signature
@@ -531,7 +531,7 @@ even if we hadn't found the leaked packets, the encryption key is plainly visibl
 Clearly the key for command connections is `5d f3 4a 48 48 48 dd 23`. We still don't know exactly how this
 encryption takes place, our only remaining suspect being the mysterious kernel driver
 `FLARE_Loaded_0` that is dynamically loaded at `0xfffffa80042d0000`. Our best lead is the packets
-we got from the memory leak, we can parse them by a combination of guessing by looking at the contents
+we got from the memory leak, we can parse them using a combination of guessing by looking at the contents,
 and reversing bits of `man.sys` and its backdoor DLL. 
 
 We have worked out the rough outline of the `install-plugin` command, we can flesh it
@@ -571,10 +571,10 @@ arguments without reversing the respective plugins:
 
 ![f1912-cmd-call-plugin](./assets/f1912-cmd-call-plugin.png)
 
-If you are hyper-focused, you'll notice that every single packet we have looked at has an extra six bytes
-at the end that do not seem to be necessary (for example the `call-plugin` command above should have
-been `0x18` long not `0x1e`). This looks like another bug of the malware platform - the bytes themselves
-don not appear to contain a hidden message, they just look like Heartbleed-style leakage from the memory of the controller
+If you are hyper-focused, you will have noticed that every single packet we looked at has an extra six bytes
+at the end which do not seem to be necessary (for example the `call-plugin` command above only uses`0x18`
+of the `0x1e` bytes in the packet). This looks like another malware platform bug - the bytes themselves
+do not appear to contain a hidden message, they just look like Heartbleed-style leakage from the memory of the controller
 process.
 
 The script [`parse_commands.py`](./parse_commands.py) uses all of our insights on the structure of the
@@ -672,7 +672,7 @@ to this anomaly:
 
 ![f1912-stmedit-stream-leak](./assets/f1912-stmedit-stream-leak.png)
 
-`stmedit` has a weird bug that seems to attach that start of the plaintext at the end of the encrypted
+`stmedit` has a weird bug that seems to attach the start of the plaintext to the end of the encrypted
 communication. As the attacker's network protocol closes connections after it receives the expected packet
 length, the leak is only visible on the wire and would not have been easily picked up during the testing
 process. Either way, it gives us a significant lever to break open the encryption with. The script
@@ -823,8 +823,8 @@ If we fail to find the password in that space, we'll start relaxing our assumpti
 in steps and retry, always prioritizing the most likely combinations (i.e. all separators being the same character).
 
 The script [`brute-doors.py`](./brute_doors.py) uses [`libkeepass`] to access the key database and performs the brute-force
-attack described above. It optimizes the search by using an outer loop athat iterates over the number _k_ of possible shifted
-letters and an inner loop that for each _k_ iteraes over the <sup>_n_</sup>C<sub>_k_</sub> combinations of _k_ shifted
+attack described above. It optimizes the search by using an outer loop that iterates over the number _k_ of possible shifted
+letters and an inner loop that for each _k_ iterates over the <sup>_n_</sup>C<sub>_k_</sub> combinations of _k_ shifted
 letters chosen from _n_. As a result, the passwords with 'few' shifted letters will be tried before the 
 less likely passwords with many shifted letters. It turns out to be a very effective method for this problem:
 
@@ -970,10 +970,10 @@ the keyboard buffer is at `0x358`. It's `volshell` time!
 We have found what looks like the keyboard buffer, and an extra bonus! There are three pointers bundled
 after the keyboard buffer base pointer: The last one points to the top of the buffer (equal to `buffer_base` + `buffer_size`),
 and the middle two are equal and point somewhere inside the buffer. The obvious guess is that these are the
-read and write pointers and they are equal because the buffer is currently empty (i.e. every keystroke has
-event been consumed by the OS). Assuming the buffer is filled forward (i.e. write pointer is incremented after a 
-character is put in), then they must currently be pointing to the oldest events, hence we'll cut he buffer at this point
-and stitch the earlier part (from the start to the read pointer) at the end.
+read and write pointers and they are equal because the buffer is currently empty (i.e. every keystroke
+event has been consumed by the OS). Assuming the buffer is filled forward (i.e. write pointer is incremented after a 
+character is put in), then they must currently be pointing to the oldest events, hence we'll cut the buffer at this point
+and stitch the earlier part (from the start to the write pointer) at the end.
 We also have a surprise to deal with: We had seen earlier
 the Keyboard Data Queue Size (stored at offset `0x2ac` of `DeviceExtension`) being read from the registry
 and defaulted to 100 (at the start of the `I8xKeyboardServiceParameters`), then we saw `I8xKeyboardStartDevice`
@@ -1005,7 +1005,7 @@ twice - this is probably part of the `'111'` at the end of the password.
 
 We can decode the scan-codes by using a combination of the [`VkKeyScan`] and [`MapVirtualKey`] Windows
 APIs, but bear in mind that these will use your current keyboard layout to do the mapping - if you want to
-decode scan-code that came from a different Region, you'll need to load and activate the relevant keyboard
+decode scan-codes that came from a different Region, you'll need to load and activate the relevant keyboard
 for that Region before calling the scan-code mapping APIs. The script [`build_scancode_map.py`](./build_scancode_map.py)
 creates a scan-code to character map using the current keyboard layout and saves it to [`scancode_map.json`](./scancode_map.json)
 (the script requires [`pywin32`]). The script [`parse_keyboard_buffer.py`](./parse_keyboard_buffer.py)
@@ -1031,7 +1031,7 @@ and where's the fun in that?
 
 ## Epilogue and Acknowledgements
 
-What a journey! This was the first forensic challenge I have ever done and it I enjoyed it immensely.
+What a journey! This was the first forensic challenge I have ever done and I enjoyed it immensely.
 `help` is very well crafted offering seemingly impenetrable conundrums (on-the-wire encryption vs.
 cleatext communication in the code), hard-core kernel hackery (reflectively loading kernel drivers),
 malware paraphernalia (encrypted stack strings, plugin-based platforms) with a bit of cryptanalysis
@@ -1050,11 +1050,12 @@ the [KeePass] process, but I only completed that after I had finished the keyboa
 had great fun and learned quite a lot.
 
 Personal thanks go out to [@Dark_Puzzle] for pointing out the right way to scan for the password,
-and [@LeeAtBenf] for proofreading my rantings and providing some decent and constructive feedback
+and [@LeeAtBenf] for proofreading my rantings and providing some decent and constructive feedback,
 some of which was taken on board - also the spellchecker suggestion helped.
-Additional thanks go out to Randall Munroe of [xkcd](https://xkcd.com) for his permissive license that
-allowed Black Hat of [Laser Pointer](https://what-if.xkcd.com/13/) fame, who helper spur us
-on to deeper driver spelunking. Also his hand-writing font came in handy for marking up disassemblies.
+Additional thanks go out to Randall Munroe of [xkcd](https://xkcd.com) for his permissive license which
+allowed Black Hat of [Laser Pointer](https://what-if.xkcd.com/13/) fame to help spur us
+on to deeper kernel spelunking. Additionally, Randall's hand-writing font came in 
+very handy for marking up disassemblies!
 
 I hope you enjoyed reading this guide, and remember:
 
@@ -1066,8 +1067,9 @@ I hope you enjoyed reading this guide, and remember:
 Footnotes
 ---
 <b id="f_winver">1.</b> Initially I misremembered the Windows build numbers and misidentified this as
-a Windows 10 dump, which led my down a wonderful rabbit hole trying to track down the kernel object
-type cookie from `nt!ObGetObjectType`. Should have loaded in [WinDbg].[&#x21a9;](#a_winver)
+a Windows 10 dump, which led me down a wonderful rabbit hole trying to track down the kernel object
+type cookie from `nt!ObGetObjectType`. Should have loaded in [WinDbg] which correctly identifies
+the crash-dump OS version as Windows 6.1.7601.18741.[&#x21a9;](#a_winver)
 
 <b id="f_net_activity">2.</b> I zoomed in on these particular connections because the ports 4444, 6666, 7777, 8888
 and very unsual, do not have any standard services associated with them and all appear to be related to the
@@ -1075,16 +1077,16 @@ same underlying process. Also 4444 was the bakdoor port installed by the [Blaste
 So there is that as well. [&#x21a9;](#a_net_activity)
 
 <b id="f_hostname">3.</b> We can also get the victim host name by checking `HKLM\CurrentControlSet\Control\ComputerName\ActiveComputerName` using
-the `printkey` [Volatility] plugin. The following incantation sorts it out:
+the `printkey` [Volatility] plugin. The following incantation sorts this out:
 ```
 volatility_2.6_win64_standalone.exe -f help.dmp --profile=Win7SP1x64 printkey -o 0xfffff8a000024010 --key ControlSet001\Control\ComputerName\ActiveComputerName
 ```
 Where `0xfffff8a000024010` is the location of the `SYSTEM` hive from [`hivelist`](./scans/hivelist.txt). [&#x21a9;](#a_hostname)
 
 <b id="f_driver_note">4.</b> In the Windows driver model, a single kernel module can create multiple
-drivers and each driver in turn can serve multiple devices. User-space procsses can only access devices
+drivers and each driver in turn can serve multiple devices. User-space processes can only access devices
 through [`CreateFile`] (and then [`DeviceIoControl`]) and then only if the driver creates a symbolic link
-associating the device (typically `\Device\lawnmower`) and a user-visible moniker. [&#x21a9;](#a_driver_note)
+associating the kernel device (typically `\Device\lawnmower`) and a user-visible moniker. [&#x21a9;](#a_driver_note)
 
 <b id="f_rip_relative">5.</b> I've loaded my driver at zero base. This does not cause any relocation
 problems because 64-bit code uses rip-relative addressing for most data access. See the section of
