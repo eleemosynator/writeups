@@ -1,10 +1,11 @@
 ﻿# 12 - help
 
-<div style="text-align: center">
+<p align="center">
+<img src="./assets/f1912-intro.png"/>
+</p>
 
-![f1912-intro](./assets/f1912-intro.png)
+<!--![f1912-intro](./assets/f1912-intro.png)-->
 
-</div>
 
 Tools
 ---
@@ -64,8 +65,8 @@ Our objectives for the initial exploratory analysis are:
 4. Collect additional facts about the victim: hostname, user names, running processes, etc
 5. Identify the malware kernel module
 
-The `crashinfo` plugin identifies the crash dump as coming from Windows Version 15 subversion 7601.
-This corresponds Windows 7 SP1 x64 which can be handled by [Volatility] profile `Win7SP1x64`.<sup id="a_winver">[1](#f_winver)</sup>
+The `crashinfo` plugin identifies the crash dump as coming from Windows Version 15 subversion 7601 (what is version 15?).
+The 7601 part makes it clear that we are looking at Windows 7 SP1 x64 which can be handled by [Volatility] profile `Win7SP1x64`.<sup id="a_winver">[1](#f_winver)</sup>
 
 After selecting the right profile, we can use the `netscan` plugin to get the IPs of the victim
 and try to identify the attacker's host. You can find the full output in [netscan.txt](./scans/netscan.txt), but
@@ -154,12 +155,11 @@ Our initial exploratory pass is now complete, we have managed to uncover more fa
 out to and the various [Volatility] plugins have made the process relatively painless. Let's collect
 everything we know so far in one table (this should be in your logbook):
 
-<div style="text-align: center">
-<center>
+<p style="center">
 
 |Fact | Notes|
 |-----|------|
-|OS Version| Windows 7 SP1 x64, v15.7601|
+|OS Version| Windows 7 SP1 x64, v6.1.7601|
 |Victim host| 192.168.1.244, WIN-HJULHEAEK51 |
 |Victim username| `FLARE ON 2019`, empty password|
 |Attacker host| 192.168.1.243, WIN-TO94970DNEU9 |
@@ -171,9 +171,7 @@ everything we know so far in one table (this should be in your logbook):
 ||Juicy target process 2648 `KeePass.exe`|
 ||The presence of various `vm*` drivers and process `vmtoolsd.exe` suggest victim is a VMWare guest|
 
-
-</center>
-</div>
+</p>
 
 ## 2. `man` In The Kernel
 
@@ -292,7 +290,7 @@ function at the cursor (`ScreenEA()`). <!-- I originally developed this to solve
 threat track challenge 2. --> We can run this on `sub_1190` to get the pattern for `rc4_crypt()`.
 
 The decryptor is in [`decrypt_strings_v1.py`](./decrypt_strings_v1.py). It uses 
-[`emu_helper.py`](../tools/emu_helper.py) from my `tools` directory and the [Unicorn]
+[`emu_helper.py`](../tools/emu_helper.py) from my [`tools`](../tools) directory and the [Unicorn]
 emulator to run the code that populates the stack-frame. Running it will also produce a log
 file with all the strings it decrypted.
 
@@ -324,7 +322,7 @@ According to the MSDN page, the [`DriverEntry`] function has the following proto
 NTSTATUS DriverInitialize(_DRIVER_OBJECT *DriverObject, PUNICODE_STRING RegistryPath)
 ```
 
-As we loaded the file as a binary image, we have to manually add the type libary for 64bit
+As we loaded the file as a binary image, we have to manually add the type library for 64bit
 Windows drivers (`ntddk64`) in [IDA] (`SHIFT-F11` to bring up the Type Libraries tab) and import
 the relevant structure definitions into our structures tab.
 With these tools, the [`DriverEntry`] routine is fairly easy to read and can be summarized as follows:
@@ -334,7 +332,7 @@ With these tools, the [`DriverEntry`] routine is fairly easy to read and can be 
 *  Keep copy of the registry path in `UNICODE_STRING64` structure at `0xC138` (renamed `g_RegistryPath`)
 *  Note that Kernel pool allocations are tagged with `"FLAR"` (`0x52414C46`)
 *  Keep copy of the default `MajorFunction` dispatch handler passed in [`DRIVER_OBJECT`] in `0xC150` (renamed `g_pfnDispatchMJ`)
-*  Set all driver dispatch handlers to `sub_50B0`, which turns out to only handle `DeviceControl` (renamed `DispatchDeviceControl`)
+*  Set all driver dispatch handlers to `sub_50B0`, which turns out to only handle [`DeviceIoControl`] (renamed [`DispatchDeviceControl`])
 *  Call [`IoCreateDevice`] to create `\Device\FLID` of type `FILE_DEVICE_UNKNOWN` (`0x22`)
 *  Keep resulting [`DEVICE_OBJECT`] pointer in `qword_C148` (renamed `g_pDeviceObjectFLID`) 
 *  Create a symbolic link `\\??\FLID` so that user-space processes can access the `FLID` device.
@@ -411,7 +409,7 @@ The `command_code` switch looks like this:
 
 Where I have named the various branches with their corresponding command codes to make it easier
 to distinguish them. I have no idea why the `INT 3` at the top would not cause an unhandled exception,
-as it's not very clear how the exception management would work in the conntext of the injected payload -
+as it's not very clear how the exception management would work in the context of the injected payload -
 the exception directory looks normal and seems to vector to the default C++ handler.
 
 In any case, following through the command handling is a bit messy, but most boil down to 
@@ -436,10 +434,10 @@ The last one simply performs a [`DeviceIoControl`] call using parts of the packe
 The middle two are a bit more complicated:
 
 * `0xD180DAB5` handled by `sub_45B0` in the driver does similar system calls as `InjectPayloadIntoProcess`
-([`KeStackAttachProcess`], etc) and calls `sub_3510` which references `RtlCreateUserThread`.
+([`KeStackAttachProcess`], etc) and calls `sub_3510` which references [`RtlCreateUserThread`].
 This is probably `call-plugin`.
 * `0xD44D6B6C` handled by `sub_1DB0` in the driver only works with kernel objects, references `ObCreateObject`, `IoDriverObjectType`,
-`PsCreateSystemThread` and  the string `FLARE_Loaded`. It seems that this function can dynamically load new drivers into the kernel! That's next-level scary.
+[`PsCreateSystemThread`] and  the string `FLARE_Loaded`. It seems that this function can dynamically load new drivers into the kernel! That's next-level scary.
 
 Now we've mapped out the core functionality in the driver and its payload dll (backdoor) and gained
 a basic understanding of the command codes of the core implant. But there is one thing that doesn't add
@@ -791,7 +789,7 @@ to specify that an APT-grade keylogging product must capture both the capitaliza
 presence of special characters! Disturbingly, it seems that the keylogger also misses out the occasional
 character (`'soeblogcom'` should have been `'someblogcom'`). Thankfully, the keylogger records show
 three different attempts the user makes to unlock the database. In all three cases the logged password is
-exactly the same, indicating that the user tried different combination of upper/lower case characters and
+exactly the same, indicating that the user tried different combinations of upper/lower case characters and
 reassuring us that we are not missing any characters. We are going to have to brute-force our way through
  this stage and given how expensive the [KeePass] [KDF] is likely to be, we'll need to collect as many clues as possible in order
 to cut down our search space.
@@ -863,14 +861,15 @@ Current context: vmtoolsd.exe @ 0xfffffa8003686620, pid=1352, ppid=1124 DTB=0x14
 
 ## 6. Degreelessness Mode
 
-<div style="text-align: center">
+<p align="center">
+<img src="./assets/more-binaries.png"/>
 
-![more-binaries](./assets/more-binaries.png)
+<!-- ![more-binaries](./assets/more-binaries.png) -->
 
-</div>
+</p>
 
 After all the deep kernel hackery we saw in `man.sys` and `stmedit` it feels a bit disappointing to
-resort to educated guessing, partial brute-forcing or inspired searching in order to claim the flag.
+have to resort to educated guessing, partial brute-forcing or inspired searching in order to claim the flag.
 Surely there must be a way that requires less luck to pull off?
 
 Well, we saw the user type in the password and we saw the keylogger records. The characters of the password
@@ -913,12 +912,11 @@ from the [`pdbparse`] package to download the PDB manually and then explicitly l
 
 So many nicely documented targets for us to choose from! Having symbols is really like God Mode for Reverse Engineering:
 
-<div style="text-align: center">
+<p align="center">
+<img src="./assets/iddqd-size-2.png"/>
+</p>
 
-
-![iddqd](./assets/iddqd-size-2.png)
-
-</div>
+<!-- ![iddqd](./assets/iddqd-size-2.png) -->
 
 Let's begin with `I8xKeyboardServiceParameters` which reads the configuration for the various keyboard
 parameters from the registry using the [`RtlQueryRegistryValues`] kernel API. The registry parameters
@@ -1024,7 +1022,12 @@ The easier way to do this would be to extract all pool blocks with tag `'8042'` 
 holds the keyboard buffer (it's kind of obvious really), but we then we wouldn't be reversing any code
 and where's the fun in that?
 
-![more-binaries](./assets/more-binaries.png)
+<p align="center">
+<img src="./assets/more-binaries.png"/>
+
+<!-- ![more-binaries](./assets/more-binaries.png) -->
+
+</p>
 
 ### COMING SOON - Lifting the flag out of the KeePass process, hackery in the kernel with `man.sys` and more!
 
@@ -1033,7 +1036,7 @@ and where's the fun in that?
 
 What a journey! This was the first forensic challenge I have ever done and I enjoyed it immensely.
 `help` is very well crafted offering seemingly impenetrable conundrums (on-the-wire encryption vs.
-cleatext communication in the code), hard-core kernel hackery (reflectively loading kernel drivers),
+cleartext communication in the code), hard-core kernel hackery (reflectively loading kernel drivers),
 malware paraphernalia (encrypted stack strings, plugin-based platforms) with a bit of cryptanalysis
 and some plain old password brute-guessing on the side. Every puzzle had multiple solutions suited
 to different skillsets and the whole experience was fascinating. Even though it wasn't the hardest
@@ -1059,7 +1062,12 @@ very handy for marking up disassemblies!
 
 I hope you enjoyed reading this guide, and remember:
 
-![reverse-engineer-all-the-things](./assets/reverse-engineer-all-the-things.jpg)
+<p align="center">
+<img src="./assets/reverse-engineer-all-the-things.jpg"/>
+
+<!-- ![reverse-engineer-all-the-things](./assets/reverse-engineer-all-the-things.jpg) -->
+
+</p>
 
 [@eleemosynator]
 
@@ -1072,8 +1080,8 @@ type cookie from `nt!ObGetObjectType`. Should have loaded in [WinDbg] which corr
 the crash-dump OS version as Windows 6.1.7601.18741.[&#x21a9;](#a_winver)
 
 <b id="f_net_activity">2.</b> I zoomed in on these particular connections because the ports 4444, 6666, 7777, 8888
-and very unsual, do not have any standard services associated with them and all appear to be related to the
-same underlying process. Also 4444 was the bakdoor port installed by the [Blaster Worm](http://virus.wikidot.com/blaster).
+and very unusual, do not have any standard services associated with them and all appear to be related to the
+same underlying process. Also 4444 was the backdoor port installed by the [Blaster Worm](http://virus.wikidot.com/blaster).
 So there is that as well. [&#x21a9;](#a_net_activity)
 
 <b id="f_hostname">3.</b> We can also get the victim host name by checking `HKLM\CurrentControlSet\Control\ComputerName\ActiveComputerName` using
@@ -1174,8 +1182,8 @@ The evil version of `stmedit` is based on the this sample. [&#x21a9;](#a_stmedit
 [`PsLookupProcessByProcessId`]:https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/ntifs/nf-ntifs-pslookupprocessbyprocessid
 [`KeStackAttachProcess`]:https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/ntifs/nf-ntifs-kestackattachprocess
 [`ZwAllocateVirtualMemory`]:https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/ntifs/nf-ntifs-ntallocatevirtualmemory
-['GetProcAddress`]:https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress
-['GetProcAddressA`]:https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress
+[`GetProcAddress`]:https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress
+[`GetProcAddressA`]:https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress
 [`VirtualAlloc`]:https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc
 [`DeviceIoControl`]:https://docs.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-deviceiocontrol
 [`VirtualFree`]:https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualfree
@@ -1191,7 +1199,9 @@ The evil version of `stmedit` is based on the this sample. [&#x21a9;](#a_stmedit
 [`MapVirtualKeyA`]:https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mapvirtualkeya
 [`VkKeyScan`]:https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-vkkeyscana
 [`VkKeyScanA`]:https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-vkkeyscana
-
+[`RtlCreateUserThread`]:https://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FExecutable%20Images%2FRtlCreateUserThread.html
+[`PsCreateSystemThread`]:https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/wdm/nf-wdm-pscreatesystemthread
+[`DispatchDeviceControl`]:https://docs.microsoft.com/windows-hardware/drivers/ddi/content/wdm/nc-wdm-driver_dispatch
 
 [`libkeepass`]:https://pypi.org/project/libkeepass/0.2.0/
 [`pdbparse`]:https://github.com/moyix/pdbparse
