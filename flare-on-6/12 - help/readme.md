@@ -49,7 +49,6 @@ Contents
 ---
 
 ## 1.<span id="a_c_the_game_is_afoot"/> The Game Is Afoot
-----
 
 As promised in the intro, the `help.7z` archive contains a 2GB crash-dump and a 32MB packet capture
 file in `PcapNg` format. This is going to be a 'forensic' challenge: It's a bit like a murder mystery
@@ -1056,7 +1055,7 @@ Perhaps there is an alternative and much shorter way of solving this. When we fi
 we noticed the [KeePass] process. What if the key database is still in the memory image of the process?
 Can we lift the flag straight out?
 
-We need to work out how to located the password database in the process memory.
+We need to work out how to locate the password database in the process memory.
 As [KeePass] is open-source software, we can look up its data structures in the source code and use
 that knowledge to construct search patterns. We first need to find the exact version of [KeePass] in
  We can extract the executable image from process
