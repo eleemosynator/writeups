@@ -2,7 +2,7 @@ Write-ups for crackmes and CTF challenges by eleemosynator.
 
 All tools and software in this repository are released under GPL3.0 or later.
 
-    Copyright (C) 2016-2018 eleemosynator
+    Copyright (C) 2016-2019 eleemosynator
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
