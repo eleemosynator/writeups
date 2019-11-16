@@ -1,0 +1,138 @@
+xref at: 180001897: 29 stack bytes at delta 0160
+ctext: fc00c1493459a8def1268d5182df049b, key: 71ca3331
+decode: u"kernel32"
+xref at: 18000193f: 17 stack bytes at delta 00fb
+ctext: 122285adde7b04d08c2955c8, key: 387ddaba
+decode: a"LoadLibraryA"
+xref at: 1800019d8: 17 stack bytes at delta 012c
+ctext: 531f389291aac208b6746f45, key: 73680139
+decode: a"VirtualAlloc"
+xref at: 180001a48: 10 stack bytes at delta 0159
+ctext: 331f7001c7, key: 5f480e48
+decode: a"ntdll"
+xref at: 180001aa8: 11 stack bytes at delta 011b
+ctext: b26dcbb13854, key: 4a017920
+decode: a"user32"
+xref at: 180001b79: 24 stack bytes at delta 00d3
+ctext: 56ddef03a2f5094d1198cae8d24974d508ef2b, key: 12b18fcc
+decode: a"GetForegroundWindow"
+xref at: 180001c22: 19 stack bytes at delta 010e
+ctext: 9dd80b21aa969226bcb957d3073f, key: e6ad96e9
+decode: a"GetWindowTextA"
+xref at: 180001cd7: 28 stack bytes at delta 0117
+ctext: b38fb82c43446030306d5203ef282c1528be2b387a28b6, key: 1c75fa0f
+decode: a"RtlEnterCriticalSection"
+xref at: 180001dd7: 28 stack bytes at delta 0153
+ctext: 1daf7def14305ac3111cdf6efbc910edb2e7838042cf89, key: 95fdf627
+decode: a"RtlLeaveCriticalSection"
+xref at: 180001e4f: 11 stack bytes at delta 016e
+ctext: 63a04f3942b5, key: 38f261c8
+decode: a"msvcrt"
+xref at: 180001ec7: 11 stack bytes at delta 00db
+ctext: 17e5aeb14b2f, key: 916de7f6
+decode: a"malloc"
+xref at: 180002244: 28 stack bytes at delta 0120
+ctext: fc00c1493459a8def1268d5182df049b, key: 71ca3331
+decode: u"kernel32"
+xref at: 1800022c2: 17 stack bytes at delta 00cb
+ctext: 122285adde7b04d08c2955c8, key: 387ddaba
+decode: a"LoadLibraryA"
+xref at: 180002322: 11 stack bytes at delta 00eb
+ctext: b26dcbb13854, key: 4a017920
+decode: a"user32"
+xref at: 1800023d7: 28 stack bytes at delta 00e7
+ctext: b38fb82c43446030306d5203ef282c1528be2b387a28b6, key: 1c75fa0f
+decode: a"RtlEnterCriticalSection"
+xref at: 1800024d7: 28 stack bytes at delta 011b
+ctext: 1daf7def14305ac3111cdf6efbc910edb2e7838042cf89, key: 95fdf627
+decode: a"RtlLeaveCriticalSection"
+xref at: 180002577: 16 stack bytes at delta 012b
+ctext: 8da2217de60e6d16674e64, key: 5cac52a3
+decode: a"GetKeyState"
+xref at: 1800025ef: 11 stack bytes at delta 0132
+ctext: 63a04f3942b5, key: 38f261c8
+decode: a"msvcrt"
+xref at: 180002660: 12 stack bytes at delta 00a7
+ctext: d641971f006991, key: f864a4d5
+decode: a"realloc"
+xref at: 1800026d0: 10 stack bytes at delta 0115
+ctext: 331f7001c7, key: 5f480e48
+decode: a"ntdll"
+xref at: 180002c72: 24 stack bytes at delta 00c1
+ctext: fc00c1493459a8def1268d5182df049b, key: 71ca3331
+decode: u"kernel32"
+xref at: 180002cd2: 11 stack bytes at delta 00ab
+ctext: b26dcbb13854, key: 4a017920
+decode: a"user32"
+xref at: 180002d4b: 19 stack bytes at delta 007b
+ctext: 6f06b01f0f22490b9a2fde51c1c6, key: d03ab919
+decode: a"CallNextHookEx"
+xref at: 180002dc9: 17 stack bytes at delta 00a7
+ctext: 122285adde7b04d08c2955c8, key: 387ddaba
+decode: a"LoadLibraryA"
+xref at: 180002f9f: 24 stack bytes at delta 0191
+ctext: fc00c1493459a8def1268d5182df049b, key: 71ca3331
+decode: u"kernel32"
+xref at: 180003017: 11 stack bytes at delta 0167
+ctext: b26dcbb13854, key: 4a017920
+decode: a"user32"
+xref at: 18000309f: 19 stack bytes at delta 00b7
+ctext: 6f06b01f0f22490b9a2fde51c1c6, key: d03ab919
+decode: a"CallNextHookEx"
+xref at: 180003147: 17 stack bytes at delta 0143
+ctext: 122285adde7b04d08c2955c8, key: 387ddaba
+decode: a"LoadLibraryA"
+xref at: 1800031de: 22 stack bytes at delta 00a3
+ctext: 19d0dbde87e50c29e559c424547e16de10, key: 9a0ac1a0
+decode: a"SetWindowsHookExA"
+xref at: 18000329e: 20 stack bytes at delta 017b
+ctext: 00f834ffaf055f3b4e2b9b5faceec5, key: 6010ce34
+decode: a"SetWinEventHook"
+xref at: 18000337e: 24 stack bytes at delta 00ff
+ctext: abbf64f125fd129cd820914e3463e06cf8371e, key: ea62cf26
+decode: a"UnhookWindowsHookEx"
+xref at: 180003436: 19 stack bytes at delta 0176
+ctext: 684ba345518931244f23e65fd58d, key: f4eeceb9
+decode: a"UnhookWinEvent"
+xref at: 1800034c7: 16 stack bytes at delta 01a3
+ctext: 385fc5b3cdab4f1e919786, key: c79967c1
+decode: a"GetMessageA"
+xref at: 18000358f: 21 stack bytes at delta 0158
+ctext: 472bfb1e7bf41dfdb06025025bc30c77, key: 1d0fb0d4
+decode: a"DispatchMessageA"
+xref at: 18000395e: 32 stack bytes at delta 01d8
+ctext: fc00c1493459a8def1268d5182df049b, key: 71ca3331
+decode: u"kernel32"
+xref at: 180003ace: 42 stack bytes at delta 0165
+ctext: 8769ee0311f5d932f5183ff3a77330a4928dc9f723eb23a4d489aaeff3d31595544bf6535e, key: cfdba913
+decode: a"InitializeCriticalSectionAndSpinCount"
+xref at: 180003b76: 17 stack bytes at delta 0173
+ctext: 122285adde7b04d08c2955c8, key: 387ddaba
+decode: a"LoadLibraryA"
+xref at: 180003c0f: 17 stack bytes at delta 01c4
+ctext: 7ef1a4adc7a59a9fb4dfa169, key: 4bbc2fe7
+decode: a"CreateThread"
+xref at: 180003cb0: 24 stack bytes at delta 019b
+ctext: a6794a0597c32235f9f83bca3386e8292c96c2, key: 58d2650b
+decode: a"WaitForSingleObject"
+xref at: 180003d35: 16 stack bytes at delta 0113
+ctext: b509e7ea6146aa526bd8fd, key: cf94d406
+decode: a"GetThreadId"
+xref at: 180003dd5: 16 stack bytes at delta 013b
+ctext: 902a891618d15981759347, key: ec1b9642
+decode: a"CloseHandle"
+xref at: 180003e6e: 17 stack bytes at delta 0194
+ctext: 531f389291aac208b6746f45, key: 73680139
+decode: a"VirtualAlloc"
+xref at: 180003f46: 23 stack bytes at delta 012f
+ctext: 518b4de9e2bb6c5901dd8feb77721700c3dc, key: ef26bb65
+decode: a"PostThreadMessageA"
+xref at: 180003fbe: 11 stack bytes at delta 0183
+ctext: b26dcbb13854, key: 4a017920
+decode: a"user32"
+xref at: 180004026: 9 stack bytes at delta 017f
+ctext: da4bc7e8, key: 7d29c272
+decode: a"free"
+xref at: 18000409e: 11 stack bytes at delta 01d2
+ctext: 63a04f3942b5, key: 38f261c8
+decode: a"msvcrt"

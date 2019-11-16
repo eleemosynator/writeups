@@ -1,0 +1,14 @@
+12. Help
+message
+
+tools:
+ - Volatility
+ - pdbparse
+ - cff
+ - Hex editor
+ - IDA
+ - Python:
+ - 
+
+
+NTSTATUS (*_imp_NtDeviceIoControlFile)(HANDLE hFile, HANDLE hEvent, PIO_APC_ROUTINE ApcRoutine, PVOID ApcContext, PIO_STATUS_BLOCK IoStatusBlock, ULONG IoControlCode, PVOID InputBuffer, ULONG InputBufferLength, PVOID OutputBuffer, ULONG OutputBuffer Length)

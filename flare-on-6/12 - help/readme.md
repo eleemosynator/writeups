@@ -6,6 +6,7 @@
 
 <!--![f1912-intro](./assets/f1912-intro.png)-->
 
+---
 
 Tools
 ---
@@ -23,12 +24,31 @@ Python Packages
 
 - [`pefile`]: PE File parsing for Python
 - [`pdbparse`]: Parse Microsoft PDB files
+- [`requests`]: High level, easy to use HTTP interface for python
+- [`pywin32`]: Python interface to the native Win32 API
 - [`PyCryptodome`]: Cryptographic primitives for Python, successor to [`PyCrypto`]
 - [`capstone`]: Disassembler framework for mulitple processors
 - [`keystone`]: Assembler framework for multiple processors
 - [`unicorn`]: Universal processor emulator
 
-## 1. The Game Is Afoot
+---
+
+Contents
+---
+
+1. [The Game Is Afoot](#a_c_the_game_is_afoot)
+2. [`man` In The Kernel](#a_c_man_in_the_kernel)
+3. [The Hidden Listener](#a_c_the_hidden_listener)
+4. [Command & Conquer](#a_c_command_and_conquer)
+5. [The Final Problem](#a_c_the_final_problem)
+6. [Degreelessness Mode](#a_c_degreelessness_mode)
+7. [The Shortening Of The Way](#a_c_kwisatz_haderach)
+8. [The General Problem](#a_c_the_general_problem)
+9. [COMING SOON - Hackery In The Kernel With `man.sys`](#a_c_hackery)
+10. [Epilogue and Acknowledgements](#a_c_epilogue)
+---
+
+## 1.<span id="a_c_the_game_is_afoot"/> The Game Is Afoot
 ----
 
 As promised in the intro, the `help.7z` archive contains a 2GB crash-dump and a 32MB packet capture
@@ -168,12 +188,12 @@ everything we know so far in one table (this should be in your logbook):
 |        | Commands issued to 4444, responses to 6666, 7777, 8888|
 |Anomalies|Kernel module `man.sys` loaded from user desktop|
 ||Unknown kernel driver `FLARE_Loaded_0` at `0xfffffa80042d0000` loaded dynamically?|
-||Juicy target process 2648 `KeePass.exe`|
-||The presence of various `vm*` drivers and process `vmtoolsd.exe` suggest victim is a VMWare guest|
+||Juicy target process `2648 KeePass.exe`|
+||The presence of various `vm*` drivers and process `vmtoolsd.exe` suggest victim is a [VMWare] guest|
 
 </p>
 
-## 2. `man` In The Kernel
+## 2.<span id="a_c_man_in_the_kernel"/> `man` In The Kernel
 
 The most promising avenue we have for investigation is to dump the `man.sys` module and pick it
 apart:
@@ -283,7 +303,7 @@ steps:
   
 
  The first step requires us to have a generic way of identifying the `rc4_crypt()` function.
-The IDAPython script [`build_yara_string`](./build_yara_string.py) defines the function
+The IDAPython script [`build_yara_string.py`](./build_yara_string.py) defines the function
 `build_yara_string()` which can be called from the IDAPython command prompt and will
 produce a [Yara] pattern (hex string with question marks for wildcards) that matches the
 function at the cursor (`ScreenEA()`). <!-- I originally developed this to solve LabyREnth 2017
@@ -300,8 +320,8 @@ strings are just system imports:
 ![f1912-driver-sub-1540-call](./assets/f1912-driver-sub-1540-call.png)
 
 The driver uses `sub_1540` to call `MmGetSystemRoutineAddress` to resolve each import.
-In a similar vein, the payload DLL function `sub_180001580` walks the LDR list of loaded
-DLLs from the PEB to find a module by name and `sub_18000424A` to call a specific export
+In a similar vein, the payload DLL function `sub_180001580` walks the [LDR Module List] of loaded
+DLLs from the [PEB] to find a module by name and `sub_18000424A` which calls a specific export
 in that module. We can include all these [Yara] patterns in our decryption script and make
 it name the functions appropriately as well as tagging the return values (module handles)
 with suitable names. All these extra features are in the final version of the deobfuscation
@@ -380,10 +400,10 @@ I guess that customization can be done during the infection process (also makes 
 less well intentioned people to reuse `man.sys`).
 
 We have made quite a bit of progress, but there is still a lot of functionality in `man.sys` which is
-presumably exposed through `DeviceIoControl` calls. Let's switch to `payload.dll`, which gets
+presumably exposed through [`DeviceIoControl`] calls. Let's switch to `payload.dll`, which gets
 installed at this stage of the infection.
 
-## 3. The Hidden Listener 
+## 3.<span id="a_c_the_hidden_listener"/> The Hidden Listener 
 
 `payload.dll` is a lot smaller and simpler than the driver we've been looking at. After running
 the string deobfuscator, we can start with the single export at `0x3F80`:
@@ -439,7 +459,7 @@ This is probably `call-plugin`.
 * `0xD44D6B6C` handled by `sub_1DB0` in the driver only works with kernel objects, references `ObCreateObject`, `IoDriverObjectType`,
 [`PsCreateSystemThread`] and  the string `FLARE_Loaded`. It seems that this function can dynamically load new drivers into the kernel! That's next-level scary.
 
-Now we've mapped out the core functionality in the driver and its payload dll (backdoor) and gained
+Now we've mapped out the core functionality in the driver and its payload DLL (backdoor) and gained
 a basic understanding of the command codes of the core implant. But there is one thing that doesn't add
 up: The backdoor does not implement any encryption, but the command packets we see on the wire are encrypted.
 It is possible that the driver comes with a 'vanilla' backdoor that deals with cleartext, but later downloads
@@ -483,7 +503,7 @@ the memory: One to decommit all pages in the allocated region (size needs to be 
 one to release the region back to the system (size must be zero). It looks like the backdoor implant
 has been leaking every single command packet! And they should be waiting for us in 876's address space.
 
-## 4. Command & Conquer 
+## 4.<span id="a_c_command_and_conquer"/> Command & Conquer 
 
 The [Volatility] script [`extract_cmds.py`](./extract_commands.py) scans all pages in the address 
 space of process 876 looking for one of the valid backdoor command codes at offset `0x0004` and then
@@ -546,7 +566,7 @@ e:\dropbox\dropbox\flareon_2019\code\screenshotdll\objchk_win7_amd64\amd64\s.pdb
 
 The filename itself is not helpful but the project name (fifth subdirectory in the path) makes the purpose
 of the plugin very clear. In order to interpret the `ioctl` command we need to 
-skim through the payload dll code again. `ioctl` is handled by the following snippet:
+skim through the payload DLL code again. `ioctl` is handled by the following snippet:
 
 ![f1912-payload-cmd-ioctl.png](./assets/f1912-payload-cmd-ioctl.png)
 
@@ -685,7 +705,7 @@ C:\Users\eleemosynator\flare-19\12 - help>scan_streams.py
 C:\Users\eleemosynator\flare-19\12 - help>
 ```
 
-## 5. The Final Problem
+## 5.<span id="a_c_the_final_problem"/> The Final Problem
 
 Now we have all the keys for the `stmedit` encryption we can decode all the exfil'ed payloads. Let's start
 with the screenshots:
@@ -740,7 +760,8 @@ C:\Users\eleemosynator\flare-19\12 - help>show_keylog.py
 keylog-01589.bin
 C:\Windows\system32\cmd.exe:
   nslookup googlecom<ENTER>
-  ping 1722173110<ENTER>nslookup soeblogcom<ENTER>
+  ping 1722173110<ENTER>
+  nslookup soeblogcom<ENTER>
   nslookup fiosquatumgatefiosrouterhome<ENTER>
 
 keylog-01609.bin
@@ -831,7 +852,7 @@ less likely passwords with many shifted letters. It turns out to be a very effec
 And now all we need to do is try **<span style="font-size:large">`Th!s_iS_th3_3Nd!!!`</span>** on [KeePass] and the flag
 is ours:
 
-![f1912-keepass-win.png](./assets/f1912-keepass-win.png)
+![f1912-keepass-win.png](./assets/f1912-keepass-win-win.png)
 
 As has been the pattern with this challenge, there are more than one ways to do the endgame! The dump contains
 a partial image of the database password and an inspired `yarascan` can pick that up:
@@ -859,7 +880,7 @@ Current context: vmtoolsd.exe @ 0xfffffa8003686620, pid=1352, ppid=1124 DTB=0x14
 >>>
 ```
 
-## 6. Degreelessness Mode
+## 6.<span id="a_c_degreelessness_mode"/> Degreelessness Mode
 
 <p align="center">
 <img src="./assets/more-binaries.png"/>
@@ -886,13 +907,13 @@ Nikolay Grebennikov, who was then CTO at Kaspersky Labs:
 Although the articles are a bit dated now, the basic hardware infrastructure has not changed in the intervening
 years. The start of the journey of your keystrokes still looks like:
 
- * Keyboard issues a processor interrupt when a keystroke event (key-up or key-down) is ready to be processed.
+ * Keyboard issues a processor interrupt when a keystroke event (key-down or key-up) is ready to be processed.
  * The [Interrupt Service Routine] of the low-level keyboard driver `i8042prt.sys` handles the interrupt.
  * As the operating system may be busy with other things when the keyboard interrupt is received, `i8042prt.sys` stores
 the keystroke event in a ring buffer (which resides in Non-Paged memory) which the OS can then process at its leisure.
 
 Our target is this low-level ring buffer. According to lore (can't remember where I heard this), the Windows
-keyboard buffer has space for 100 events, which might sound like a lot, but remember key-up and key-down are
+keyboard buffer has space for 100 events, which might sound like a lot, but remember key-down and key-up are
 separate events, and a shifted character will eat up two extra events for `SHIFT-DOWN` and `SHIFT-UP`, leaving
 us with only about 30 characters in the end. This is still plenty of space for our password though.
 
@@ -904,9 +925,9 @@ results in my most favourite prompt:
 
 ![f1912-ida-pdb](./assets/f1912-ida-pdb.png)
 
-Some versions of [IDA] can fail to download symbols, if that happens to you just use the `symchk.py` script
-from the [`pdbparse`] package to download the PDB manually and then explicitly load it into [IDA] using the
-`Load file` sub-menu. And look at these names:
+Some versions of [IDA] can fail to download symbols, if that happens to you, just use the [`symchk.py`] script
+from the [`pdbparse`] package to download the PDB manually (or look in the [WinDbg] symbols cache) and then 
+explicitly load it into [IDA] using the `Load file` sub-menu. And look at these names:
 
 ![f1912-i8042prt-names](./assets/f1912-i8042prt-names.png)
 
@@ -959,7 +980,7 @@ Don't you love `PDB` files? The mysterious argument is actually the `i8042prt` k
 `DeviceExtension` part of the object is meant to be a device-specific and driver-specific data area
 that is opaque to the OS (and everyone else). We can find the relevant [`DEVICE_OBJECT`] structure
 using [`devicetree`](./scans/devicetree.txt), which puts it at `0xfffffa8001ec9400` (you want
-the `'i8042prt` device that is attached to keyboard-like upstream device like `\Driver\kbdclass`).
+the `i8042prt` device that is attached to keyboard-like upstream device like `\Driver\kbdclass`).
 We know that the keyboard buffer size is at offset `0x2ac` of `DeviceExtension` and the pointer to
 the keyboard buffer is at `0x358`. It's `volshell` time!
 
@@ -1022,6 +1043,8 @@ The easier way to do this would be to extract all pool blocks with tag `'8042'` 
 holds the keyboard buffer (it's kind of obvious really), but we then we wouldn't be reversing any code
 and where's the fun in that?
 
+## 7.<span id="a_c_kwisatz_haderach"/> The Shortening of the Way
+
 <p align="center">
 <img src="./assets/more-binaries.png"/>
 
@@ -1029,14 +1052,360 @@ and where's the fun in that?
 
 </p>
 
-### COMING SOON - Lifting the flag out of the KeePass process, hackery in the kernel with `man.sys` and more!
+Perhaps there is an alternative and much shorter way of solving this. When we first opened the crash dump,
+we noticed the [KeePass] process. What if the key database is still in the memory image of the process?
+Can we lift the flag straight out?
+
+We need to work out how to located the password database in the process memory.
+As [KeePass] is open-source software, we can look up its data structures in the source code and use
+that knowledge to construct search patterns. We first need to find the exact version of [KeePass] in
+ We can extract the executable image from process
+`2648` using the [Volatility] `procdump` plugin. The version record on the extract file identifies it
+as `1.37` and we can download the full source code from:
+
+* https://sourceforge.net/projects/keepass/files/KeePass%201.x/1.37/KeePass-1.37-Src.zip/download.
+
+The interesting (for us) part of the application is in the `KeePassLibCpp` folder (under the `KeePassLibC`
+project). The main class used to hold an open database is called `CPwManager` and is defined in the
+header file `PwManager.h`:
+
+![f1912-keepass-pwmanager](./assets/f1912-keepass-pwmanager.png)
+
+Each instance of `CPwManager` contains a copy of the key database header, which begins with a known
+8-byte signature (`PWM_DBSIG_1` and `PWM_DBSIG_2` encoded little-endian), which should make it easy
+to find. A `yarascan` for the signature picks up a hit at address [`0x0032cbf8`](./scans/yara_kdb_2648.txt)
+in the `2648 KeePass.exe` process:
+
+```
+C:\Users\eleemosynator\flare-19\12 - help>volatility_2.6_win64_standalone.exe -f help.dmp --profile=Win7SP1x64 yarascan -p 2648 -Y "{ 03 d9 a2 9a 65 fb 4b b5 }" -s 32
+Volatility Foundation Volatility Framework 2.6
+Rule: r1
+Owner: Process KeePass.exe Pid 2648
+0x0032cbf8  03 d9 a2 9a 65 fb 4b b5 03 00 00 00 04 00 03 00   ....e.K.........
+0x0032cc08  ea 77 fe 19 34 6a 5b 2f 14 65 70 e1 fc 89 a1 00   .w..4j[/.ep.....
+```
+
+ It looks like the opened database is in crash-dump!
+We saw that `CPwManager` holds a pointer to an array of password entries, now let's look at the definition
+of the password entry structure in `PwStructs.h`:
+
+![f1912-keepass-pwentry](./assets/f1912-keepass-pwentry.png)
+
+It looks like password are held in encrypted form in memory, but at least we are given a reference
+to the responsible routine  `UnlockEntryPassword` defined in `PwManager.cpp`:
+
+![f1912-keepass-unlock-entry-password](./assets/f1912-keepass-unlock-entry-password.png)
+
+The reference to [`DPAPI`] is definitely not the best news. This is a Microsoft Windows API that delegates
+the encryption of sensitive application data to the kernel. The implementation of `CMemoryProtectionEx::DecryptMemory`
+simply rounds up the data size to a multiple of 16 (`CRYPTPROTECTMEMORY_BLOCK_SIZE`) and calls
+[`CryptUnprotectMemory`] with parameter `CRYPTPROTECTMEMORY_SAME_PROCESS`. This is the 'lightweight'
+part of [`DPAPI`] which encrypts a data blob with a key that is specific to the process that issued the
+API call. The comments in the source file suggest that use of [`DPAPI`] is not always enabled, but we
+should be able to tell if it's been used by checking if the size of the encrypted data has been rounded
+up to a multiple of 16 (the alternative is [RC4] which maintains the size of the encrypted data).
+ Armed with this knowledge, we are ready to dive into the [KeePass] process with `volshell`:
+
+![f1912-keepass-volshell-cpwmanager](./assets/f1912-keepass-volshell-cpwmanager.png)
+
+The password entries start at `0x00f10048` and each is `0x58` long. If you remember the screenshot earlier,
+we are after the second  entry:
+
+![f1912-keepass-volshell-pwentry](./assets/f1912-keepass-volshell-pwentry.png)
+
+The username is at `0x00fb11b0` and the password at `0xf1bea8` with length `0x23`:
+
+![f1912-keepass-volshell-password](./assets/f1912-keepass-volshell-password.png)
+
+It looks like the encrypted form of the flag is `0x30` long signifying that `DPAPI` had been enabled in
+the [KeePass] process. Once we have saved the encrypted flag in `flag_protected.bin`, we are ready to
+begin our assault on [`DPAPI`]. The first entrypoint to look at is [`CryptProtectMemory`] which is exported
+from `crypt32.dll`. As usual, we can use our own copy of this binary (instead of exporting out of the 
+crash-dump) and import the relevant symbol file into [IDA]:
+
+![f1912-dpapi-crypt32](./assets/f1912-dpapi-crypt32.png)
+
+Looks like we'll need to follow that rabbit into `cryptbase.dll` export `SystemFunction040`:
+
+![f1912-dpapi-cryptbase](./assets/f1912-dpapi-cryptbase.png)
+
+And `cryptbase.dll` in turn issues [`DeviceIoControl`] code `0x39000E` on `KSecDD` using the
+internal native API [`NtDeviceIoControlFile`]. Into the kernel we go: Pulling up `KSecDD.sys` in [IDA],
+loading debug symbols and then looking up the helpfully sign-posted `KsecDeviceControl` function leads to:
+
+![f1912-dpapi-ksecdd](./assets/f1912-dpapi-ksecdd.png)
+
+It seems that most [`DeviceIoControl`] calls into `KSecDD` are delegated through this strange long symbol
+which demangles to:
+
+```c++
+_KSEC_DEVICE_CONTROL_EX_FUNCTIONS * gKsecpDeviceControlExtension;   // pointer to function table,
+                                                                    // hence the double dereference
+```
+
+We can dig further into `KSecDD.sys` to find where it is initialized, however since we have a snap-shot
+of the state of `KSecDD` in our crash-dump, we can simply examine the symbol directly. As [Volatility] does
+not have built-in support for symbols, it is much easier to do this by loading `help.dmp` into [WinDbg]. 
+Using the dereference operator (`poi`) gets us to our target immediately:
+
+![f1912-dpapi-windbg-ksecdd](./assets/f1912-dpapi-windbg-ksecdd.png)
+
+Aha! The device control extension for `KSecDD` actually lives in `cng.sys`. Further down the rabbithole
+we go, starting with `CngDeviceControl` in `cng.sys`. After some boiler plate, this function goes through
+a switch structure that [IDA] does a pretty good job of decoding. Tracing through to the branch that handles
+`0x39000e`, we arrive at a seemingly complex piece of code that deals with a group of six [`DeviceIoControl`]
+codes, all of which get routed to the function`CngEncryptMemory`:
+
+![f1912-dpapi-cng-device-control](./assets/f1912-dpapi-cng-device-control.png)
+
+I have given the various labels more descriptive names in order to make the logic a bit easier to understand,
+but fundamentally the bit of code above maps the six different [`DeviceIoControl`] codes into the values of
+ the last two arguments passed to `CngEncryptMemory`. The six different codes correspond to all combinations
+ of values of the `dwFlags` passed to `CryptProtectMemory` and the two possible directions: `Protect`
+ and `Unprotect`. These are
+then mapped back to the original value of `dwFlags` which is stored in `ebp` and passed into `CngEncryptMemory`
+as the fourth argument (in `r9d`), and the direction flag which is stored in `r12d` and passed into `CngEncryptMemory` as the
+third argument (in `r8d`). In summary the signature of `CngEncryptMemory` is:
+
+```c++
+NTSTATUS CngEncryptMemory(PVOID pMemory, DWORD dwSize, DWORD dwDirection, DWORD dwFlags);
+```
+
+And the mapping between [`DPAPI`] calls and `CngEncryptMemory` looks like:
+
+|`DAPI` call|`cryptbase.dll` function|`dwFlags`|ioctl code|`ebp`|`r12d`|
+|:---------|:----:|:--------:|:---------:|:---:|:----:|
+|`CryptProtectMemory`|`SystemFunction040`|`SAME_PROCESS`|`0x39000e`|0|1|
+|`CryptProtectMemory`|`SystemFunction040`|`CROSS_PROCESS`|`0x390016`|1|1|
+|`CryptProtectMemory`|`SystemFunction040`|`SAME_LOGON`|`0x39001e`|2|1|
+|`CryptUnprotectMemory`|`SystemFunction041`|`SAME_PROCESS`|`0x390012`|0|0|
+|`CryptUnprotectMemory`|`SystemFunction041`|`CROSS_PROCESS`|`0x39001a`|1|0|
+|`CryptUnprotectMemory`|`SystemFunction041`|`SAME_LOGON`|`0x390022`|2|0|
+
+This pattern of translation of parameter values to separate ioctl codes and then back
+to parameter values is eerily reminiscent of the pattern we saw with `InjectPayloadIntoProcess` function
+in `man.sys`.
+
+We are interested only in `CRYPTPROTECTMEMORY_SAME_PROCESS`, which corresponds to a value of zero for
+`dwFlags` and hence the fourth argument of `CngEncryptMemory` passed in `r9d`:
+
+![f1912-dpapi-cng-encrypt-1](./assets/f1912-dpapi-cng-encrypt-1.png)
+
+Remember that [KeePass] rounded up the protected block size to a multiple of 16 (`CRYPTPROTECTMEMORY_BLOCK_SIZE`).
+This is in line with the MSDN documentation for [`CryptProtectMemory`], but it seems that `CngEncryptMemory` has
+a compatibility code-path for an older version that required data sizes that were multiples of 8.<sup id="a_triple_des">[8](#f_triple_des)</sup>
+ This is controlled by a flag in `ebp`, which will be set to 1 in our case. Following on from
+ `handle_SAME_PROCESS`:
+
+![f1912-dpapi-cng-encrypt-2](./assets/f1912-dpapi-cng-encrypt-2.png)
+
+As we are still in God Mode, we get to see the names of functions and even the prototype for `GenerateAESKey`
+which presumably derives an [AES] key schedule (first argument) from a data blob passed as a pointer and
+length in the second and third arguments. The data blob used to generate the [AES] key is a 4-byte result
+from calling [`ZwQueryInformationProcess`] with and undocumented value (36) for `ProcessInformationClass`
+concatenated with the `QWORD` representation of the process creation timestamp. A little Google-ing quickly
+leads us to the definition for the undocumented value of `ProcessInformationClass`: the [`ReactOs`] 
+source claims it corresponds to [`ProcessCookie`] which is a random 32-bit value generated by the kernel
+on process initiation - the ideal ingredient for a process-specific encryption key. Both the process
+creation time and the process cookie are fields in the [`_EPROCESS`] structure, so we'll have no problem
+lifting them from the crash dump. Let's take a closer look at `GenerateAESKey`.
+
+![f1912-dpapi-cng-generate-aes-key](./assets/f1912-dpapi-cng-generate-aes-key.png)
+
+That's fairly straightforward, it appends the process-specific data to 
+a static global [SHA1] context and uses the first 16 bytes of the resulting digest as the AES128 key.
+We should be able to lift the contents of the [SHA1] context by looking up the symbol `g_ShaHash`.
+Now back to `CngEncryptMemory`:
+
+![f1912-dpapi-cng-encrypt-3](./assets/f1912-dpapi-cng-encrypt-3.png)
+
+The encryption is done use AES128 in [CBC] mode courtesy of the generic [CBC] implementation function
+with signature:
+
+```c++
+typedef void (*PFNECBCIPHER)(PVOID pvOutBlock, PVOID pvInBlock, PVOID pvKeySchedule, DWORD dwDirection);
+
+void CBC(PFNECBCIPHER pfnEcbCipher, DWORD dwBlockSize, PVOID pOut, PVOID pIn, PVOID pvKeySchedule, DWORD dwDirection, PVOID pvPrevCipherText)
+```
+
+The initial value of `PrevCiphertext` is the [IV] which is taken from `cng` global symbol `RandomSalt`.
+All we need to do now is collect the [SHA1] seed, the [KeePass] process cookie and start timestamp and
+the [IV] from `RandomSalt` and we can decrypt the flag. We can dive back into [WinDbg] to extract all
+these values:
+
+![f1912-dpapi-windbg-cng-keys](./assets/f1912-dpapi-windbg-cng-keys.png)
+
+The [SHA1] context structure generally consists of three ingredients: A 64 byte buffer for the current
+block being read, a 160 bit (20 byte) [SHA1] state which is initialized to a specific value and a 64bit
+count of the total number of characters that have been consumed. Each `'Update'` operation adds characters
+to the buffer until its full upon which the SHA1 core '`Transform'` operation is executed to derive the
+new [SHA1] state from the previous state and the full 64-byte buffer. As the [SHA1] state is still at its
+initial value and the consumed byte count is less than 64, we can just read the random seed used from the
+top of the buffer.
+
+Continuing with [WinDbg], we can use the `!process` command to find the pointer to the [`_EPROCESS`]
+structure in order to lift the process cookie and creation timestamp:
+
+![F1912-dpapi-windbg-eprocess](./assets/f1912-dpapi-windbg-eprocess.png)
+
+Copy/Pasting all these values into the simple Python script [`decrypt_flag.py`](./decrypt_flag.py):
+
+```Python
+''' Standalone script for Flare-On 6 challenge 12
+    Decrypt DAPI-encrypted flag blob from KeePass memory Image
+'''
+from Crypto.Cipher import AES
+from Crypto.Hash import SHA1
+import struct
+
+def get_hex(s):
+    return s.translate(None, ' -').decode('hex')
+
+flag_crypted = open('flag_protected.bin', 'rb').read()
+
+# Prepare the AES key
+ctx = SHA1.new()
+ctx.update(get_hex('1c 81 87 7b 81 73 be 1b 99 da 11 35 10 43 4e da 97 9e b0 0e 37 cd 31 2b')) # from hex dump
+ctx.update(struct.pack('<LQ', 0x14c044f5, 0x1d5493fc578c885))    # Process cookie and Creation Time
+aes_key = ctx.digest()[:16]
+
+iv = get_hex('35 3a d5 b5 19 db b2 64-ba e3 85 9e d7 b1 02 e8') # copy/pasted from the hex dump
+
+flag = AES.new(aes_key, AES.MODE_CBC, IV=iv).decrypt(flag_crypted)
+
+print flag[:flag.find('\0')]
+```
+
+![f1912-dpapi-decrypt-flag-win](./assets//f1912-dpapi-decrypt-flag-win.png)
+
+## 8.<span id="a_c_the_general_problem"/> The General Problem<sup id="a_the_general_problem">[9](#f_the_general_problem)</sup>
+
+<p align="center">
+ <a href="https://xkcd.com/974/"><img src="./assets/xkcd-the-general-problem.png"/></a>
+</p>
+
+After delving into the guts of `cng.sys`, it seems a shame to stop at just covering only the `SAME_PROCESS`
+mode of operation and not extend our tools to support all modes. Let's have a quick look at `CROSS_PROCESS`:
+
+![f1912-dpapi-cng-encrypt-4](./assets/f1912-dpapi-cng-encrypt-4.png)
+
+That was straightforward, a single-initialization global [AES] key, stored as an expanded key schedule
+in the global variable named `g_AESKey`. Now turning to `SAME_LOGON`:
+
+![f1912-dpapi-cng-encrypt-5](./assets/f1912-dpapi-cng-encrypt-5.png)
+
+That's a bit more complicated. I have imported the definition of [`SECURITY_SUBJECT_CONTEXT`] and labelled
+the result of [`SeCaptureSubjectContext`], as well as labelling the various branches to make the logic
+a bit easier to understand. The `SAME_LOGON` flag requires that the protected data can be shared between
+processes that are part of the same logon session.
+To achieve this, the derived [AES] key is generated by `GenerateAESKey` fed with the result of
+[`SeQueryAuthenticationIdToken`]. The `AuthenticationId` is a Locally Unique Identifier ([`LUID`]) that is guaranteed
+to be distinct for each logon session on a given machine. The `AuthenticationId` is part of the
+[`_TOKEN`] structure which is easy to access via [`_EPROCESS`]. The [Machines That Think](https://bsodtutorials.wordpress.com/)
+blog has a really good article on tokens and the [`_TOKEN`] structure here: https://bsodtutorials.wordpress.com/2014/08/09/windows-access-tokens-token-and-_token/
+
+We also saw earlier that there was code path which dealt with (legacy?) data sizes that are multiples of 8
+instead of 16. `CngEncryptMemory` keeps a flag in `ebp` set to `true` for multiple-of-16 sizes
+and `false` for the legacy mode. Following through that code path, it turns out that `cng.sys` simply
+uses a different cipher, namely [Triple-DES], which has an 8-byte (64 bit) block size:
+
+![f1912-dpapi-cng-encrypt-triple-des](./assets/f1912-dpapi-cng-encrypt-triple-des.png)
+
+The ingredients that go into the keys for `SAME_PROCESS` and `SAME_LOGON` are the same,
+but there is a separate `GenerateKey()` implementation for [Triple-DES] keys:
+
+![f1912-dpapi-cng-generate-des-key](./assets/f1912-dpapi-cng-generate-des-key.png)
+
+For some reason the [Triple-DES] implementation uses a 168-bit key generated from the concatenation
+of two related [SHA1] digests. That's a bit of an odd choice given that [Triple-DES] has at most
+112 bits of security as each [DES] round has 56 bits security and one can mount a [Meet-In-The-Middle Attack][MITMA]
+by creating a hash of all 2^56 possible inversions of the last round.
+
+In any case, the `CROSS_PROCESS` code path also uses a fixed global key schedule, but this
+time it's a [Triple-DES] key schedule. The global keys, the [IV] and seed hash are all initialized
+in `CngEncryptMemoryInitialize` which starts off by generating three blocks of random numbers
+of sizes 24, 16 and 16 respectively:
+
+![f1912-dpapi-cng-encypt-init-1](./assets/f1912-dpapi-cng-encrypt-init-1.png)
+
+It then proceeds to use these three blocks to seed the global hash variable (`g_ShaHash`),
+the `CROSS_PROCESS` [Triple-DES] and [AES] key (`g_DES3Key` and `g_AESKey`), a global
+unused hash `g_AESHash` and the common [IV] `RandomSalt`:
+
+![f1912-dpapi-cng-encrypt-init-2](./assets/f1912-dpapi-cng-encrypt-init-2.png)
+
+It seems that the same 24 random numbers in the global seed hash `g_ShaHash` are also used as
+the global [Triple-DES] key `g_DES3Key`, so we won't need to reverse the [DES] key schedule
+to get the key. Similarly, the initialization code saves the same 16 bytes used for the `g_AESKey`
+key schedule into the (unused?) hash context `g_AESHash`. As the first [AES] subkey is the
+full key, we have a choice between lifting the global [AES] key from the key schedule or the
+buffer of the `g_AESHash` context. We can quickly verify all this in [WinDbg]:
+
+![f1912-dpapi-windbg-cng-aes-key](./assets/f1912-dpapi-windbg-cng-aes-key.png)
+
+Now we know how to extract all the necessary keys and decrypt memory regions protected by
+[`CryptProtectMemory`]. Using the debugging symbols should make our code robust to various
+service packs and patches, but we still need to settle one more question: How does all this
+look in Windows 10?
+
+The Windows 10 version of `cng.sys` is bigger (by 60%) and more complicated. Several names
+have been changed to protect the innocent. The broad differences are:
+
+ * `CngEncryptMemory` is now called `CngEncryptMemoryEx`
+ * The compiler uses [SSE] instructions more aggressively and unrolls small `memcpy` calls into
+   [SSE] 128-bit 'mov' operations.
+ * `CngEncryptMemoryEx` uses a new higher level API for Cryptographic Primitives (functions
+    like `SymCrypt*`).
+ * The core algorithm (key derivation, ingredients used for various values of `dwFlags`) is
+   exactly the same, but mangled symbol names are different because they've been migrated
+   to the `SymCrypt` types.
+ * The `RandomSalt` symbol is no longer exposed in the `pdb` file (maybe no longer declared
+   as `extern`?).
+
+![f1912-dpapi-cng-encrypt-win10](./assets/f1912-dpapi-cng-encrypt-win10.png)
+
+On first Autoanalysis [IDA] mis-typed the symbol `WPP_MAIN_CB` as [`DEVICE_OBJECT`],
+which resulted in `RandomSalt` being mis-identified as `WPP_MAIN_CB.DeviceExtension`.
+Clearing the type of `WPP_MAIN_CB` removed that issue.
+
+The `SymCrypt` structures have slightly different shape, but it's easy to work out the relevant
+offsets by looking at the data from a Windows 10 dump in [WinDbg].
+
+![f1912-dpapi-windbg-cng-aes-key-win10](./assets/f1912-dpapi-windbg-cng-aes-key-win10.png)
+
+Now we have all the data we need to build a generic tool that can decrypt data protected with
+[`CryptProtectMemory`]. We can get the symbols for the relevant version of  `cng.sys` from
+the Microsoft Symbol Server and use them to locate the keys in the memory image. The only
+complication is finding the location of the [IV] (`RandomSalt`) in Windows 10 crash-dumps.
+The best way to get this is to use [`distorm3`] or [`capstone`] to disassemble `CngEncryptMemoryInitialize`
+and locate a `rip`-relative write (or writes) for a block of 16 bytes.
+
+The [Volatility] script [`dpapi.py`] puts all this knowledge together. It offers a couple
+of functions capable of decrypting memory areas protected with the [`CryptProtectMemory`] API:
+
+```Python
+dpapi.unprotect_memory(address_space, pid, data_address, data_size, dwFlags=dpapi.SAME_PROCESS, verbose=False)
+dpapi.unprotect_memory_blob(address_space, pid, data, dwFlags=dpapi.SAME_PROCESS, verbose=False)
+```
+
+Internally, it downloads the symbol file for the version `cng.sys` in the crash dump and uses
+[`pdbparse`] to extract the global symbols and find the locations of the `cng` keys.
+
+![f1912-dpapi-win](./assets/f1912-dpapi-win.png)
+
+With this final tool in hand we can write a very simple volatility script ([`dump_keepass.py`](./dump_keepass.py))
+which can dump the contents of every open [KeePass] database in a memory image:
+
+![f1912-dpapi-keepass-win-win](./assets/f1912-dpapi-keepass-win-win.png)
+
+## 9.<span id="a_c_hackery"/> COMING SOON - Hackery in the kernel with `man.sys`
 
 
-## Epilogue and Acknowledgements
+## 10.<span id="a_c_epilogue"/> Epilogue and Acknowledgements
 
 What a journey! This was the first forensic challenge I have ever done and I enjoyed it immensely.
 `help` is very well crafted offering seemingly impenetrable conundrums (on-the-wire encryption vs.
-cleartext communication in the code), hard-core kernel hackery (reflectively loading kernel drivers),
+plaintext communication in the code), hard-core kernel hackery (reflectively loading kernel drivers),
 malware paraphernalia (encrypted stack strings, plugin-based platforms) with a bit of cryptanalysis
 and some plain old password brute-guessing on the side. Every puzzle had multiple solutions suited
 to different skillsets and the whole experience was fascinating. Even though it wasn't the hardest
@@ -1135,17 +1504,39 @@ Current context: vmtoolsd.exe @ 0xfffffa8003686620, pid=1352, ppid=1124 DTB=0x14
 '4d5a90000300000004000000ffff0000'
 >>> open('binaries/man.sys', 'wb').write(man_sys)
 ```
+
+The actual bug in [Volatility] is just a 'braino' where the wrong variable was being used to keep
+track of alignment during reads (it was using initial address versus current address). I have fixed
+this in my fork of the repository. You can see the changes here: https://github.com/volatilityfoundation/volatility/compare/master...eleemosynator:master
+ 
  [&#x21a9;](#a_volshell_bug)
 
 <b id="f_stmedit">7. </b> Our FLARE tormentors have given us a helpful pointer here: One of Microsoft
 [Windows Filtering Platform] sample drivers is also called `stmedit`: https://github.com/microsoft/Windows-driver-samples/tree/master/network/trans/stmedit.
-The evil version of `stmedit` is based on the this sample. [&#x21a9;](#a_stmedit)
+The evil version of `stmedit` is based on this sample. [&#x21a9;](#a_stmedit)
 
+<b id="f_triple_des">8. </b> The legacy codepath uses exactly the same key derivation algorithms (with different seeds)
+and encrypts the memory block with [Triple-DES] in [CBC] mode. [Triple-DES] has a block size of 64 bits (8 bytes). [&#x21a9;](#a_triple_des)
 
+<b id="f_the_general_problem">9. </b> <a href="https://xkcd.com/974/">"The General Problem"</a> is a cartoon by Randall Munroe, reproduced here thanks to his
+very permissive license. Original available on: https://xkcd.com/974/ [&#x21a9;](#a_the_general_problem)
+
+[//]:\beginsection{links}
 [IDA]:https://www.hex-rays.com/products/ida/support/download.shtml
+[AES]:https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
+[DES]:https://en.wikipedia.org/wiki/Data_Encryption_Standard
+[SSE]:https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions
+[Triple-DES]:https://en.wikipedia.org/wiki/Triple_DES
+[MITMA]:https://en.wikipedia.org/wiki/Meet-in-the-middle_attack
+[SHA1]:https://en.wikipedia.org/wiki/SHA-1
+[SHA-1]:https://en.wikipedia.org/wiki/SHA-1
+[SHA]:https://en.wikipedia.org/wiki/SHA-1
+[CBC]:https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#CBC
+[IV]:https://en.wikipedia.org/wiki/Initialization_vector
 [Volatility]:https://www.volatilityfoundation.org/
 [NetworkMiner]:http://www.netresec.com/?page=NetworkMiner
 [Wireshark]:https://www.wireshark.org/
+[VMWare]:https://www.vmware.com/uk/products/workstation-player.html
 [TCPflow]:https://www.tecmint.com/tcpflow-analyze-debug-network-traffic-in-linux/
 [Rekall]:http://www.rekall-forensic.com/
 [yara]:https://virustotal.github.io/yara/
@@ -1155,6 +1546,16 @@ The evil version of `stmedit` is based on the this sample. [&#x21a9;](#a_stmedit
 [Unicorn]:https://www.unicorn-engine.org/
 [KDF]:https://en.wikipedia.org/wiki/Key_derivation_function
 [Windows Filtering Platform]:https://docs.microsoft.com/en-gb/windows/win32/fwp/windows-filtering-platform-start-page
+[LDR Module List]:http://sandsprite.com/CodeStuff/Understanding_the_Peb_Loader_Data_List.html
+[PEB]:http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FNT%20Objects%2FProcess%2FPEB.html
+[Interrupt Service Routine]:https://docs.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-interrupt-service-routines
+[`DPAPI`]:https://docs.microsoft.com/en-us/previous-versions/ms995355(v%3Dmsdn.10)
+[`ReactOs`]:https://reactos.org/
+[`ProcessCookie`]:https://doxygen.reactos.org/d2/dea/psdk_2winternl_8h.html#a986543046e9a63c091c874efae0565d6
+[`_EPROCESS`]:https://www.nirsoft.net/kernel_struct/vista/EPROCESS.html
+[`SECURITY_SUBJECT_CONTEXT`]:https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/wdm/ns-wdm-_security_subject_context
+[`LUID`]:https://docs.microsoft.com/en-gb/windows/win32/api/winnt/ns-winnt-luid
+[`_TOKEN`]:https://www.nirsoft.net/kernel_struct/vista/TOKEN.html
 
 [@nickharbour]:https://twitter.com/nickharbour
 [@fireeye]:https://twitter.com/fireeye
@@ -1202,17 +1603,32 @@ The evil version of `stmedit` is based on the this sample. [&#x21a9;](#a_stmedit
 [`RtlCreateUserThread`]:https://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FExecutable%20Images%2FRtlCreateUserThread.html
 [`PsCreateSystemThread`]:https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/wdm/nf-wdm-pscreatesystemthread
 [`DispatchDeviceControl`]:https://docs.microsoft.com/windows-hardware/drivers/ddi/content/wdm/nc-wdm-driver_dispatch
+[`CryptUnprotectMemory`]:https://docs.microsoft.com/en-gb/windows/win32/api/dpapi/nf-dpapi-cryptunprotectmemory
+[`CryptProtectMemory`]:https://docs.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectmemory
+[`NtDeviceIoControlFile`]:https://docs.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntdeviceiocontrolfile
+[`ZwQueryInformationProcess`]:https://docs.microsoft.com/en-us/windows/win32/procthread/zwqueryinformationprocess
+[`SeCaptureSubjectContext`]:https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/ntifs/nf-ntifs-secapturesubjectcontext
+[`SeQueryAuthenticationIdToken`]:https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/ntifs/nf-ntifs-sequeryauthenticationidtoken
 
 [`libkeepass`]:https://pypi.org/project/libkeepass/0.2.0/
 [`pdbparse`]:https://github.com/moyix/pdbparse
 [`pywin32`]:https://pypi.org/project/pywin32/
 [`PyCrypto`]:https://pypi.python.org/pypi/pycrypto
+[`distorm3`]:https://pypi.org/project/distorm3/
+[`requests`]:https://pypi.org/project/requests/
 [`pefile`]:https://pypi.org/project/pefile/
 [`PyCryptodome`]:https://pycryptodome.readthedocs.io/en/latest/index.html
 [`capstone`]:https://www.capstone-engine.org/
 [`keystone`]:https://www.keystone-engine.org/
 [`unicorn`]:https://www.unicorn-engine.org/
+[`symchk.py`]:https://github.com/moyix/pdbparse/blob/master/examples/symchk.py
 
+[`dpapi.py`]:./dpapi.py
+[`pdbtool.py`]:./pdbtool.py
+[`pdbcache.py`]:./pdbcache.py
+[`symcache.py`]:./symcache.py
+
+[//]:\endsection{links}
 
 <!--
 [//]: # - [NetworkMiner][NetworkMiner]: Good network traffic triage and classification tool, however free version

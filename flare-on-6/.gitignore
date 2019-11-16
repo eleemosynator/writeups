@@ -9,8 +9,13 @@
 *.til
 *.nam
 *.id?
+*.ffs_db
+*.bak
+*.obj
+*.7z
+*.sys
 *.idb
 *.i64
-*.sys
-*.dll
-*_ing.bin
+.pdbcache
+.pdbcache/*
+tmp

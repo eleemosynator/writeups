@@ -2,3 +2,7 @@
 *.un~
 *.pyc
 *.ffs_db
+*.i64
+*.idb
+*.exe
+*.sys
