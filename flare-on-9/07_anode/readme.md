@@ -521,7 +521,7 @@ in its decimal form. We can test these in the REPL shell:
 <p align="center"><img src="./assets/f2207-anode-boolean-bigint.png"/></p>
 
 And that's it! `anode` has finally given up all its mysteries. It seems fairly clear that the challenge author patched the binary in a few
-selective places to achieve his aims. 
+selective places to achieve their aims. 
 
 ```
 n0t_ju5t_A_j4vaSCriP7_ch4l1eng3@flare-on.com
