@@ -145,7 +145,7 @@ higher bits.
 These characteristics mean that we can use a **Divide and Conquer Attack** where we brute force bit 0 of all the bytes in the input (flag) until we match
 bit 0 of all the bytes of the output, then after we have solved for all bit 0s in the input, we attack bit 1 using the bit 0 values we have already determined
 and so on until we have the full input (flag). If we assume that each of the 31 unknown bytes of the flag has 7 bits, this approach reduces
-the number of operations we need for a brute-force from $2^{93}$ to $7 * 2^{31} \sim 2^{32}$, which is much more feasible.
+the number of operations we need for a brute-force from $2^{93}$ to $7 * 2^{31} \sim 2^{34}$, which is much more feasible.
 
 And it gets even better! For any addition or subtraction operation, bit 0 of the result is just the XOR of bit 0 of the two inputs. This is
 just a mathematical expression of the primary school addition rules:
