@@ -311,7 +311,7 @@ And running it gives:
 
 <p align="center"><img src="./assets/f2207-anode-patch.png"/></p>
 
-So `anode` is built on version `v14.15.3` of `NodeJS`. [GitHub] has got all versions of the source nicely tagged with version numbers
+So `anode` is built on version `v14.15.3` of `NodeJS`. [GitHub](https://github.com/nodejs/node) has got all versions of the source nicely tagged with version numbers
 so we can find the relevant snapshot and look up the workings of `Math.random()`. The relevant definition is at line 438 of
 [`math.tq`](https://github.com/nodejs/node/blob/e725355e5cdd77ac9287dea9c0d2958c994e8c27/deps/v8/src/builtins/math.tq#L438)
 under the Javascript V8 engine builtins interface, reproduced below.
@@ -413,7 +413,7 @@ of the `XorShift128` state.
   }
 ```
 
-Since the definition of `XorShift128` only permutes bits around and XOR's them together, we can use exactly the same Linear Algebra
+Since the definition of `XorShift128` only permutes bits around and XORs them together, we can use exactly the same Linear Algebra
 approach we used to crack `anode` to back out the initial state from a set of random numbers drawn from inside `NodeJS`. We can
 structure our attack as follows:
 
